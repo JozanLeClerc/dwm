@@ -52,6 +52,7 @@ Some of the main key bindings:
 - **alternative tiled mode** with `super+shift+s`
 - **maximized mode (monocle)** on selected window with `super+f`
 - **floating mode** on selected window with `super+space`
+- **toggle top bar** with `super+escape`. Hidden by default
 - **exit** dwm with `super+shift+e`
 
 My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles.git) repository. It should be placed in `~/.dwm/` directory.
