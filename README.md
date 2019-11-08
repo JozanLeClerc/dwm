@@ -17,7 +17,7 @@ As I am not using dwm anymore, developpement on my build might stop on this vers
    `libXft`
 
 Optional:
-   `st`
+   `st`  
    `slock`  
    `dmenu`
 
@@ -37,7 +37,7 @@ I am not shure about how to set it up on `gdm`, `lightdm`, etc...
 
 ## Bindings
 
-"Window" or "tile" is being called "stack" in this segment as it an apropriate name.
+**"Window"** or **"tile"** is being called **"stack"** in this segment as it an apropriate name.
 
 Some of the main key bindings:
 - **switch** to workspace 1-10 with `super+{F1-F10}`
