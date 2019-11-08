@@ -61,16 +61,25 @@ Some of the main key bindings:
 ## Optional config
 
 You might want to change my st invocation to your terminal emulator of choice.  
-To do exactly this change:
+To do exactly this change:  
 ```c
 static const char *termcmd[] = { "st", NULL };
-```
-to:
+```  
+to:  
 ```c
 static const char *termcmd[] = { "your-beloved-terminal-emulator", NULL };
-```
+```  
+in `config.h` on **line 80**.
 
-In `config.h` on **line 80**.
+For web browsers change:
+```c
+static const char *qbcmd[]  = { "qutebrowser", NULL };
+```
+to:  
+```c
+static const char *qbcmd[]  = { "your-favorite-web-browser", NULL };
+```  
+in `config.h` on **line 81**.
 
 ## Patches
 
