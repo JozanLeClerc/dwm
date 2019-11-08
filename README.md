@@ -17,7 +17,7 @@ Required:
    `libXft`
 
 Optional:  
-   `st` find my custom improved build [here](https://github.com/JozanLeClerc/st-laptop) 
+   `st` find my custom improved build [here](https://github.com/JozanLeClerc/st-laptop)  
    `slock`  
    `dmenu`
 
