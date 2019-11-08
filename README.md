@@ -55,4 +55,6 @@ Some of the main key bindings:
 - toggle **top bar** with `super+escape`. Hidden by default
 - **exit** dwm with `super+shift+e`
 
+## Patches
+
 My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles.git) repository. It should be placed in `~/.dwm/` directory.
