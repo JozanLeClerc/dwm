@@ -37,21 +37,23 @@ I am not shure about how to set it up on `gdm`, `lightdm`, etc...
 
 ## Bindings
 
+"Window" or "tile" is being called "stack" in this segment as it is the apropriate name
+
 Some of the main key bindings:
 - **switch** to workspace 1-10 with `super+{F1-F10}`
 - **show all workspaces** at once with `super+F12`
-- **move** selected window to workspace 1-10 with `super+shift+{F1-F10}`
+- **move** selected stack to workspace 1-10 with `super+shift+{F1-F10}`
 - **fire up** `st` terminal with `super+return`
-- **kill** selected window with `super+q`
-- **cycle through** windows down/up with `super+j/k`
-- **move** selected window down/up with `super+shift+j/k`
-- **resize** master window to left/right with `super+h/l`
+- **kill** selected stack with `super+q`
+- **cycle through** stacks down/up with `super+j/k`
+- **move** selected stack down/up with `super+shift+j/k`
+- **resize** master stack to left/right with `super+h/l`
 - **invoke** `dmenu_run` application launcher with `super+p`. Get it [here](https://tools.suckless.org/dmenu/)
 - **invoke** `slock` screen locker with `super+shift+l`. Get it [here](https://tools.suckless.org/slock/)
 - toggle **normal tiled mode** with `super+s`
 - toggle **alternative tiled mode** with `super+shift+s`
-- toggle **maximized mode** (monocle) on selected window with `super+f`
-- toggle **floating mode** on selected window with `super+space`
+- toggle **maximized mode** (monocle) on selected stack with `super+f`
+- toggle **floating mode** on selected stack with `super+space`
 - toggle **top bar** with `super+escape`. Hidden by default
 - **exit** dwm with `super+shift+e`
 
