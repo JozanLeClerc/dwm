@@ -2,7 +2,7 @@
 
 # Joe's dwm (the dynamic window manager) laptop build
 
-The original [dwm](https://dwm.suckless.org/) desktop manager build use to use on my ThinkPad.
+The original [dwm](https://dwm.suckless.org/) desktop manager build I used to run on my ThinkPad.
 
 Based on version 6.2.
 
