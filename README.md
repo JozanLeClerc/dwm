@@ -9,14 +9,14 @@ As I am not using dwm anymore, developpement on my build might stop on this vers
 
 ## Dependencies
 
-#### Required:  
+#### Required:
    `gcc`  
    `make`  
    `xorg`  
    `libX11`  
    `libXft`
 
-#### Optional:  
+#### Optional:
    `st` find my custom improved build [here](https://github.com/JozanLeClerc/st-laptop)  
    `slock`  
    `dmenu`
