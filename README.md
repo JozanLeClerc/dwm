@@ -42,9 +42,9 @@ Some of the main key bindings:
 - **show all workspaces** at once with `super+F12`
 - **move selected window** to workspace 1-10 with `super+shift+{F1-F10}`
 - **fire up** `st` terminal with `super+return`
-- **kill selected** window with `super+q`
+- **kill** selected window with `super+q`
 - **cycle through** windows down/up with `super+j/k`
-- **move selected** window down/up with `super+shift+j/k`
+- **move** selected window down/up with `super+shift+j/k`
 - **resize** master window to left/right with `super+h/l`
 - **invoke** `dmenu_run` application launcher with `super+p`. Get it [here](https://tools.suckless.org/dmenu/)
 - **invoke** `slock` screen locker with `super+shift+l`. Get it [here](https://tools.suckless.org/slock/)
