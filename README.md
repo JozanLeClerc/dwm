@@ -6,7 +6,7 @@ The original [dwm](https://dwm.suckless.org/) desktop manager build use to use o
 
 Based on version 6.2.
 
-
+As I am not using dwm anymore, developpement on my build might stop on this version.
 
 ## Dependencies
 
@@ -36,9 +36,12 @@ Some of the main key bindings:
 - **switch to workspace** 1-10 with `super+{F1-F10}`
 - **show all workspaces at once** with `super+F12`
 - **move selected window to workspace** 1-10 with `super+shift+{F1-F10}`
-- **fire up st** terminal with `super+return`
+- **fire up** `st` terminal with `super+return`
 - **kill selected window** with `super+q`
-- **select window** left/down/up/right with `super+h/j/k/l`
+- **cycle through windows** down/up with `super+j/k`
+- **move selected window** down/up with `super+shift+j/k`
+- **resize** master window to left/right with `super+h/l`
+- **invoke** `slock` screen locker with `super+shift+l`. Get it [here](https://tools.suckless.org/slock/)
 - **normal tiled mode** with `super+s`
 - **alternative tiled mode** with `super+shift+s`
 - **maximized mode (monocle)** on selected window with `super+f`
@@ -46,5 +49,3 @@ Some of the main key bindings:
 - **exit** dwm with `super+shift+e`
 
 My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles.git) repository. It should be placed in `~/.dwm/` directory.
-
-As I am not using dwm anymore, developpement on my build might stop on this version.
