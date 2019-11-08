@@ -43,7 +43,7 @@ Some of the main key bindings:
 - **switch** to workspace 1-10 with `super+{F1-F10}`
 - **show all workspaces** at once with `super+F12`
 - **move** selected stack to workspace 1-10 with `super+shift+{F1-F10}`
-- **fire up** `st` terminal with `super+return`. See how to set it to another terminal emulator in [optional config]
+- **fire up** `st` terminal with `super+return`. See how to set it to another terminal emulator in [optional config](https://github.com/JozanLeClerc/dwm-laptop/blob/master/README.md#optional-config)  
 - **kill** selected stack with `super+q`
 - **cycle through** stacks down/up with `super+j/k`
 - **move** selected stack down/up with `super+shift+j/k`
