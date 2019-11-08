@@ -9,6 +9,7 @@ As I am not using dwm anymore, developpement on my build might stop on this vers
 
 ## Dependencies
 
+Required:  
    `gcc`  
    `make`  
    `xorg`  
@@ -16,7 +17,7 @@ As I am not using dwm anymore, developpement on my build might stop on this vers
    `libXft`
 
 Optional:  
-   `st`  
+   `st` find my custom improved build [here](https://github.com/JozanLeClerc/st-laptop) 
    `slock`  
    `dmenu`
 
@@ -32,7 +33,7 @@ To use it as a default WM, if you are using xinit, add this to your `.xinitrc`:
 ```shell
 exec dwm
 ```
-I am not shure about how to set it up on `gdm`, `lightdm`, etc...
+I am not shure about how to set it up on regular desktop managers like `gdm` or `lightdm`.
 
 ## Bindings
 
