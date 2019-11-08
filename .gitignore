@@ -1,0 +1,6 @@
+*.diff
+*.o
+*.def.h
+*.rej
+*.orig
+dwm
