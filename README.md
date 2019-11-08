@@ -8,14 +8,22 @@ Based on version 6.2.
 
 ## Dependencies
 
-  `gcc`  
-  `make`  
-  `xorg`  
-  `libX11`  
-  `libXft`  
+  `gcc`
+  `make`
+  `xorg`
+  `libX11`
+  `libXft`
 
 ## Installation
 
 To install this open a terminal and run these commands:
 ```shell
-git clone https://github.com/JozanLeClerc/dwm-laptop
+git clone https://github.com/JozanLeClerc/dwm-laptop.git
+cd dwm-laptop
+sudo make clean install
+```
+To use it as a default WM, if you are using xinit, add this to your `.xinitrc`:
+```shell
+exec dwm
+```
+I am not shure about how to set it up on `gdm`/`lightdm`/etc...
