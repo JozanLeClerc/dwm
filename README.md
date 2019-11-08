@@ -60,7 +60,7 @@ Some of the main key bindings:
 
 ## Optional config
 
-You might want to change my st invocation to your terminal emulator of choice.  
+You might want to change my `st` invocation to your terminal emulator of choice.  
 To do exactly this change:  
 ```c
 static const char *termcmd[] = { "st", NULL };
@@ -70,6 +70,7 @@ to:
 static const char *termcmd[] = { "your-beloved-terminal-emulator", NULL };
 ```  
 in `config.h` on **line 80**.
+
 
 For web browsers change:
 ```c
