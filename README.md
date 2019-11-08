@@ -43,7 +43,7 @@ Some of the main key bindings:
 - **switch** to workspace 1-10 with `super+{F1-F10}`
 - **show all workspaces** at once with `super+F12`
 - **move** selected stack to workspace 1-10 with `super+shift+{F1-F10}`
-- **fire up** `st` terminal with `super+return`
+- **fire up** `st` terminal with `super+return`. See how to set it to another terminal emulator in [optional config]
 - **kill** selected stack with `super+q`
 - **cycle through** stacks down/up with `super+j/k`
 - **move** selected stack down/up with `super+shift+j/k`
@@ -57,6 +57,20 @@ Some of the main key bindings:
 - toggle **top bar** with `super+escape`. Hidden by default
 - **exit** dwm with `super+shift+e`
 
+## Optional config
+
+You might want to change my st invocation to your terminal emulator of choice.  
+To do exactly this change:
+```c
+static const char *termcmd[] = { "st", NULL };
+```
+to:
+```c
+static const char *termcmd[] = { "your-beloved-terminal-emulator", NULL };
+```
+
+In `config.h` on **line 80**.
+
 ## Patches
 
-My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles.git) repository. It should be placed in `~/.dwm/` directory.
+My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles) repository. It should be placed in `~/.dwm/` directory.
