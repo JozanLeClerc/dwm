@@ -50,7 +50,7 @@ Some of the main key bindings:
 - **invoke** `slock` screen locker with `super+shift+l`. Get it [here](https://tools.suckless.org/slock/)
 - toggle **normal tiled mode** with `super+s`
 - toggle **alternative tiled mode** with `super+shift+s`
-- toggle **maximized mode (monocle)** on selected window with `super+f`
+- toggle **maximized mode** (monocle) on selected window with `super+f`
 - toggle **floating mode** on selected window with `super+space`
 - toggle **top bar** with `super+escape`. Hidden by default
 - **exit** dwm with `super+shift+e`
