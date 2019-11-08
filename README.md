@@ -10,11 +10,16 @@ As I am not using dwm anymore, developpement on my build might stop on this vers
 
 ## Dependencies
 
-  `gcc`  
-  `make`  
-  `xorg`  
-  `libX11`  
-  `libXft`
+   `gcc`  
+   `make`  
+   `xorg`  
+   `libX11`  
+   `libXft`
+
+Optional:
+   `st`
+   `slock`  
+   `dmenu`
 
 ## Installation
 
@@ -41,6 +46,7 @@ Some of the main key bindings:
 - **cycle through windows** down/up with `super+j/k`
 - **move selected window** down/up with `super+shift+j/k`
 - **resize** master window to left/right with `super+h/l`
+- **invoke** `dmenu_run` application launcher with `super+p`. Get it [here](https://tools.suckless.org/dmenu/)
 - **invoke** `slock` screen locker with `super+shift+l`. Get it [here](https://tools.suckless.org/slock/)
 - **normal tiled mode** with `super+s`
 - **alternative tiled mode** with `super+shift+s`
