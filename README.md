@@ -38,7 +38,7 @@ I am not shure about how to set it up on `gdm`, `lightdm`, etc...
 ## Bindings
 
 Some of the main key bindings:
-- **switch to workspace** 1-10 with `super+{F1-F10}`
+- **switch** to workspace 1-10 with `super+{F1-F10}`
 - **show all workspaces** at once with `super+F12`
 - **move selected window** to workspace 1-10 with `super+shift+{F1-F10}`
 - **fire up** `st` terminal with `super+return`
