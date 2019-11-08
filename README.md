@@ -83,4 +83,4 @@ in `config.h` on **line 81**.
 
 ## Patches
 
-My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles) repository. It should be placed in `~/.dwm/` directory.
+My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles) repository. It should be placed in `~/.dwm` directory.
