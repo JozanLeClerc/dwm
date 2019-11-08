@@ -46,3 +46,5 @@ Some of the main key bindings:
 - **exit** dwm with `super+shift+e`
 
 My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles.git) repository. It should be placed in `~/.dwm/` directory.
+
+As I am not using dwm anymore, developpement on my build might stop on this version.
