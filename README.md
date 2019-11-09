@@ -40,23 +40,23 @@ I am not shure about how to set it up on regular desktop managers like `gdm` or 
 **"Window"** or **"tile"** is being called **"stack"** in this segment as it an apropriate name.
 
 Some of the main key bindings:
-- **switch** to workspace 1-10 with `super+{F1-F10}`
-- **show all workspaces** at once with `super+F12`
-- **move** selected stack to workspace 1-10 with `super+shift+{F1-F10}`
-- **fire up** `st` terminal with `super+return`. See how to set it to another terminal emulator in [optional config](https://github.com/JozanLeClerc/dwm-laptop/blob/master/README.md#optional-config) 
-- **kill** selected stack with `super+q`
-- **cycle through** stacks down/up with `super+j/k`
-- **move** selected stack down/up with `super+shift+j/k`
-- **resize** master stack to left/right with `super+h/l`
-- **invoke** `dmenu_run` application launcher with `super+p`. Get it [here](https://tools.suckless.org/dmenu/)
-- **invoke** `slock` screen locker with `super+shift+l`. Get it [here](https://tools.suckless.org/slock/)
-- **invoke** `qutebrowser` if installed with `super+3`. See how to set it up to your favorite web browser in [optional config](https://github.com/JozanLeClerc/dwm-laptop/blob/master/README.md#optional-config)
-- toggle **normal tiled mode** with `super+s`
-- toggle **alternative tiled mode** with `super+shift+s`
-- toggle **maximized mode** (monocle) on selected stack with `super+f`
-- toggle **floating mode** on selected stack with `super+space`
-- toggle **top bar** with `super+escape`. Hidden by default
-- **exit** dwm with `super+shift+e`
++ **switch** to workspace 1-10 with `super+{F1-F10}`
++ **show all workspaces** at once with `super+F12`
++ **move** selected stack to workspace 1-10 with `super+shift+{F1-F10}`
++ **fire up** `st` terminal with `super+return`. See how to set it to another terminal emulator in [optional config](https://github.com/JozanLeClerc/dwm-laptop/blob/master/README.md#optional-config) 
++ **kill** selected stack with `super+q`
++ **cycle through** stacks down/up with `super+j/k`
++ **move** selected stack down/up with `super+shift+j/k`
++ **resize** master stack to left/right with `super+h/l`
++ **invoke** `dmenu_run` application launcher with `super+p`. Get it [here](https://tools.suckless.org/dmenu/)
++ **invoke** `slock` screen locker with `super+shift+l`. Get it [here](https://tools.suckless.org/slock/)
++ **invoke** `qutebrowser` if installed with `super+3`. See how to set it up to your favorite web browser in [optional config](https://github.com/JozanLeClerc/dwm-laptop/blob/master/README.md#optional-config)
++ toggle **normal tiled mode** with `super+s`
++ toggle **alternative tiled mode** with `super+shift+s`
++ toggle **maximized mode** (monocle) on selected stack with `super+f`
++ toggle **floating mode** on selected stack with `super+space`
++ toggle **top bar** with `super+escape`. Hidden by default
++ **exit** dwm with `super+shift+e`
 
 ## Optional config
 
@@ -86,9 +86,9 @@ in `config.h` on **line 81**.
 
 Patches list to come:
 
--
--
--
--
++
++
++
++
 
 My own autostart script can be found under my [dotfiles](https://github.com/JozanLeClerc/dotfiles) repository. It should be placed in `~/.dwm` directory.
