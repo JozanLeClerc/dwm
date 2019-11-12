@@ -1,25 +1,25 @@
 # README in progress
 
-# Joe's dwm (the dynamic window manager) laptop build
+# Joe's dwm (the dynamic window manager) build
 
-The original [dwm](https://dwm.suckless.org/) desktop manager build I used to run on my ThinkPad.  
+The original [dwm](https://dwm.suckless.org/) desktop manager build I used to run.  
 Based on version 6.2.
 
-As I am not using dwm anymore, developpement on my build might stop on this version.
+As I am not using dwm anymore, developpement on my build might be stuck on this version.
 
 ## Dependencies
 
 #### Required:
-   `gcc`  
-   `make`  
-   `xorg`  
-   `libX11`  
-   `libXft`
++ `gcc`
++ `make`
++ `xorg`
++ `libX11`
++ `libXft`
 
 #### Optional:
-   `st` find my custom improved build [here](https://github.com/JozanLeClerc/st-laptop)  
-   `slock`  
-   `dmenu`
++ `st` find my custom improved build [here](https://github.com/JozanLeClerc/st-laptop)
++ `slock`
++ `dmenu`
 
 ## Installation
 
