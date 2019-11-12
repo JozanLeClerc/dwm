@@ -50,7 +50,7 @@ Some of the main key bindings:
 + **resize** master stack to left/right with `super+h/l`
 + **invoke** `dmenu_run` application launcher with `super+p`. Get it [here](https://tools.suckless.org/dmenu/)
 + **invoke** `slock` screen locker with `super+shift+l`. Get it [here](https://tools.suckless.org/slock/)
-+ **invoke** `qutebrowser` if installed with `super+3`. See how to set it up to your favorite web browser in [optional config](https://github.com/JozanLeClerc/dwm-laptop/blob/master/README.md#optional-config)
++ **invoke** `qutebrowser` if installed with `super+3`. See how to set it up to your favorite web browser in [optional config](#optional-config)
 + toggle **normal tiled mode** with `super+s`
 + toggle **alternative tiled mode** with `super+shift+s`
 + toggle **maximized mode** (monocle) on selected stack with `super+f`
