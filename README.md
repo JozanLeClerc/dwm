@@ -17,7 +17,7 @@ As I am not using dwm anymore, developpement on my build might be stuck on this 
 + `libXft`
 
 #### Optional:
-+ `st` find my custom improved build [here](https://github.com/JozanLeClerc/st-laptop)
++ `st` find my custom improved build [here](https://github.com/JozanLeClerc/st)
 + `slock`
 + `dmenu`
 
