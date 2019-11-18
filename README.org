@@ -1,8 +1,9 @@
 * Joe's dwm (the dynamic window manager) build
 The original [[https://dwm.suckless.org/][dwm]] desktop manager build I used to run.
+
 Based on version 6.2.
 
-As I am not using dwm anymore, developpement on my build might be stuck on this version.
+/Note:/ as I am not using dwm anymore, developpement on my build might be stuck on this version.
 
 ** Dependencies
 **** Required:
