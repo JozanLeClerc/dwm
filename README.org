@@ -91,4 +91,4 @@ List of patches in use:
 ** More
 Thanks for checking my custom ~dwm~ build.
 
-My own autostart script can be found under my [[https://github.com/JozanLeClerc/dotfiles][dotfiles]] repository. It should be placed in ~\~/.dwm~ directory.
+My own autostart script can be found under my [[https://github.com/JozanLeClerc/dotfiles][dotfiles]] repository. It should be placed in ~\ ~/.dwm~ directory.
