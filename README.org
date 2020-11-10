@@ -59,7 +59,6 @@ List of patches in use:
 - /noborder/
 - /pertag/
 - /restartsig/
-- /swallow/
 
 My own autostart script can be found under my
 [[https://git.jozanleclerc.xyz/jozan/dotfiles-bsd/files.html][dotfiles-bsd]] repository. It should
