@@ -27,7 +27,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+static const char *tags[] = { "0", "1", "2", "3", "4", "5", "6", "7" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -160,12 +160,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_F6,                                     5)
 	TAGKEYS(                        XK_F7,                                     6)
 	TAGKEYS(                        XK_F8,                                     7)
-	TAGKEYS(                        XK_F9,                                     8)
-	TAGKEYS(                        XK_F8,                                     7)
-	TAGKEYS(                        XK_F9,                                     8)
-	TAGKEYS(                        XK_F10,                                    9)
-	TAGKEYS(                        XK_F11,                                    10)
-	TAGKEYS(                        XK_F12,                                    11)
 	{ MODKEY|ShiftMask,             XK_e,                     quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,                     quit,           {1} },
 };
