@@ -51,11 +51,11 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
+	{ "-|=",      ntile },
+	{ "-|-",      nbstack },
  	{ "[\\]",     dwindle },
  	{ "[@]",      spiral },
 	{ "[]=",      tile },    /* first entry is default */
-	{ "-|=",      ntile },
-	{ "-|-",      nbstack },
 	{ "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
@@ -118,11 +118,11 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,           {0} },
 	{ MODKEY,                       XK_Tab,                   view,           {0} },
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
-	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* dwindle */
-	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* spiral */
-	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[2]} }, /* tile */
-	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[3]} }, /* nbtile */
-	{ MODKEY|ShiftMask,             XK_t,                     setlayout,      {.v = &layouts[4]} }, /* nbstack */
+	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* nbtile */
+	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* nbstack */
+	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[2]} }, /* dwindle */
+	{ MODKEY|ShiftMask,             XK_t,                     setlayout,      {.v = &layouts[3]} }, /* spiral */
+	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[4]} }, /* tile */   
 	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[5]} }, /* monocle */
 	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[6]} }, /* floating */
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
