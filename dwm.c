@@ -150,7 +150,7 @@ static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interac
 static void arrange(Monitor *m);
 static void arrangemon(Monitor *m);
 static void attach(Client *c);
-static void attachaside(Client *c);
+static void attachBelow(Client *c);
 static void attachstack(Client *c);
 static void buttonpress(XEvent *e);
 static void checkotherwm(void);
@@ -216,6 +216,9 @@ static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
+static void tagnextmon(const Arg *arg);
+static void tagprevmon(const Arg *arg);
+static void tagothermon(const Arg *arg, int dir);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
@@ -450,18 +453,27 @@ attach(Client *c)
 	c->next = c->mon->clients;
 	c->mon->clients = c;
 }
-
 void
-attachaside(Client *c) {
-	Client *at = nexttagged(c);
-	if(!at) {
-		attach(c);
+attachBelow(Client *c)
+{
+	//If there is nothing on the monitor or the selected client is floating, attach as normal
+	if(c->mon->sel == NULL || c->mon->sel->isfloating) {
+        Client *at = nexttagged(c);
+        if(!at) {
+            attach(c);
+            return;
+            }
+        c->next = at->next;
+        at->next = c;
 		return;
-		}
-	c->next = at->next;
-	at->next = c;
-}
+	}
 
+	//Set the new client's next property to the same as the currently selected clients next
+	c->next = c->mon->sel->next;
+	//Set the currently selected clients next property to the new client
+	c->mon->sel->next = c;
+
+}
 
 void
 attachstack(Client *c)
@@ -1018,12 +1030,12 @@ grabkeys(void)
 	}
 }
 
-void
-incnmaster(const Arg *arg)
-{
-	selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] = MAX(selmon->nmaster + arg->i, 0);
-	arrange(selmon);
-}
+/* void */
+/* incnmaster(const Arg *arg) */
+/* { */
+/*     selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] = MAX(selmon->nmaster + arg->i, 0); */
+/*     arrange(selmon); */
+/* } */
 
 #ifdef XINERAMA
 static int
@@ -1119,7 +1131,7 @@ manage(Window w, XWindowAttributes *wa)
 		c->isfloating = c->oldstate = trans != None || c->isfixed;
 	if (c->isfloating)
 		XRaiseWindow(dpy, c->win);
-	attachaside(c);
+	attachBelow(c);
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
 		(unsigned char *) &(c->win), 1);
@@ -1230,16 +1242,6 @@ movemouse(const Arg *arg)
 		selmon = m;
 		focus(NULL);
 	}
-}
-
- Client *
-nexttagged(Client *c) {
-	Client *walked = c->mon->clients;
-	for(;
-		walked && (walked->isfloating || !ISVISIBLEONTAG(walked, c->tags));
-		walked = walked->next
-	);
-	return walked;
 }
 
 void
@@ -1387,6 +1389,16 @@ moveresizeedge(const Arg *arg) {
 		nmy = c->y - oy + c->h - oh;
 		XWarpPointer(dpy, None, None, 0, 0, 0, 0, nmx, nmy);
 	}
+}
+
+ Client *
+nexttagged(Client *c) {
+	Client *walked = c->mon->clients;
+	for(;
+		walked && (walked->isfloating || !ISVISIBLEONTAG(walked, c->tags));
+		walked = walked->next
+	);
+	return walked;
 }
 
 Client *
@@ -1632,7 +1644,7 @@ sendmon(Client *c, Monitor *m)
 	detachstack(c);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
-	attachaside(c);
+	attachBelow(c);
 	attachstack(c);
 	focus(NULL);
 	arrange(NULL);
@@ -1922,6 +1934,36 @@ tagmon(const Arg *arg)
 }
 
 void
+tagnextmon(const Arg *arg)
+{
+	tagothermon(arg, 1);
+}
+
+void
+tagprevmon(const Arg *arg)
+{
+	tagothermon(arg, -1);
+}
+
+void
+tagothermon(const Arg *arg, int dir)
+{
+	Client *sel;
+	Monitor *newmon;
+
+	if (!selmon->sel || !mons->next)
+		return;
+	sel = selmon->sel;
+	newmon = dirtomon(dir);
+	sendmon(sel, newmon);
+	if (arg->ui & TAGMASK) {
+		sel->tags = arg->ui & TAGMASK;
+		focus(NULL);
+		arrange(newmon);
+	}
+}
+
+void
 tile(Monitor *m)
 {
 	unsigned int i, n, h, mw, my, ty;
@@ -2176,7 +2218,7 @@ updategeom(void)
 					detachstack(c);
 					c->mon = mons;
 					attach(c);
-					attachaside(c);
+					attachBelow(c);
 					attachstack(c);
 				}
 				if (m == selmon)

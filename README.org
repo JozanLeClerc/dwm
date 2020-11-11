@@ -50,15 +50,17 @@ Some of the main key bindings:
 List of patches in use:
 - /actualfullscreen/
 - /alwayscenter/
-- /attachaside/
+- /attachasideandbelow/
 - /cool-autostart/
 - /fibonacci/
 - /focusonclick/
+- /nmaster/
 - /moveresize/
 - /movestack/
 - /noborder/
 - /pertag/
 - /restartsig/
+- /tagothermon/
 
 My own autostart script can be found under my
 [[https://git.jozanleclerc.xyz/jozan/dotfiles-bsd/files.html][dotfiles-bsd]] repository. It should

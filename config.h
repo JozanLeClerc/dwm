@@ -46,12 +46,16 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
+#include "nmaster.c"
 #include "fibonacci.c"
+
 static const Layout layouts[] = {
 	/* symbol     arrange function */
  	{ "[\\]",     dwindle },
  	{ "[@]",      spiral },
 	{ "[]=",      tile },    /* first entry is default */
+	{ "-|=",      ntile },
+	{ "-|-",      nbstack },
 	{ "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
@@ -59,10 +63,12 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ MODKEY,                          KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,                KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask,              KEY,      tagnextmon,     {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask|ShiftMask,    KEY,      tagprevmon,     {.ui = 1 << TAG} },
+	/* { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \ */
+	/* { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, \ */
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/usr/local/bin/dash", "-c", cmd, NULL } }
@@ -103,8 +109,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,                     togglebar,      {0} },
 	{ MODKEY,                       XK_j,                     focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,                     focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,                     incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,                     incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_a,                     incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_x,                     incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,                     setmfact,       {.f = -0.025} },
 	{ MODKEY|ShiftMask,             XK_l,                     setmfact,       {.f = +0.025} },
 	{ MODKEY|ShiftMask,             XK_j,                     movestack,      {.i = +1 } },
@@ -112,11 +118,13 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,           {0} },
 	{ MODKEY,                       XK_Tab,                   view,           {0} },
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
-	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* dwindle */
+	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* spiral */
+	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[2]} }, /* tile */
+	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[3]} }, /* nbtile */
+	{ MODKEY|ShiftMask,             XK_t,                     setlayout,      {.v = &layouts[4]} }, /* nbstack */
+	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[5]} }, /* monocle */
+	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[6]} }, /* floating */
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
 	{ MODKEY,                       XK_space,                 togglefloating, {0} },
 	{ MODKEY,                       XK_f,                     togglefullscr,  {0} },

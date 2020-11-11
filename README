@@ -31,37 +31,39 @@ To use it as a default WM, if you are using xinit, add this to your .xinitrc:
 Bindings
 --------
 Some of the main key bindings:
-- switch to workspace 1-12 with super+{F1-F12}
-- move selected stack to workspace 1-12 with super+shift+{F1-F12}
-- fire up st terminal with super+return
-- kill selected stack with super+q
-- cycle through stacks down/up with super+j/k
-- move selected stack down/up with super+shift+j/k
-- resize master stack to left/right with super+h/l
-- invoke dmenu_run application launcher with super+p
-- toggle better tiled mode with super+s
-- toggle alternative tiled mode with super+shift+s
-- toggle normal tiled mode with super+t
-- toggle fullscreen mode on selected stack with super+f
-- toggle floating mode on selected stack with super+space
-- toggle top bar with super+b. Hidden by default
-- restart dwm with super+shift+r
-- exit dwm with super+shift+e
+ - switch to workspace 1-12 with super+{F1-F12}
+ - move selected stack to workspace 1-12 with super+shift+{F1-F12}
+ - fire up st terminal with super+return
+ - kill selected stack with super+q
+ - cycle through stacks down/up with super+j/k
+ - move selected stack down/up with super+shift+j/k
+ - resize master stack to left/right with super+h/l
+ - invoke dmenu_run application launcher with super+p
+ - toggle better tiled mode with super+s
+ - toggle alternative tiled mode with super+shift+s
+ - toggle normal tiled mode with super+t
+ - toggle fullscreen mode on selected stack with super+f
+ - toggle floating mode on selected stack with super+space
+ - toggle top bar with super+b. Hidden by default
+ - restart dwm with super+shift+r
+ - exit dwm with super+shift+e
 
 Patches
 -------
 List of patches in use:
-- actualfullscreen
-- alwayscenter
-- attachaside
-- cool-autostart
-- fibonacci
-- focusonclick
-- moveresize
-- movestack
-- noborder
-- pertag
-- restartsig
+ - actualfullscreen
+ - alwayscenter
+ - attachasideandbelow
+ - cool-autostart
+ - fibonacci
+ - focusonclick
+ - nmaster
+ - moveresize
+ - movestack
+ - noborder
+ - pertag
+ - restartsig
+ - tagothermon
 
 My own autostart script can be found under my dotfiles-bsd repository:
 https://git.jozanleclerc.xyz/jozan/dotfiles-bsd/files.html
