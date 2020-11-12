@@ -60,6 +60,7 @@ List of patches in use:
 - /noborder/
 - /pertag/
 - /restartsig/
+- /sizehints/
 - /tagothermon/
 
 My own autostart script can be found under my
