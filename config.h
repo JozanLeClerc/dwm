@@ -21,7 +21,7 @@ static const char *colors[][3]      = {
 
 static const char *const autostart[] = {
 	"/home/jozan/.config/dwm/dwmrc", NULL,
-	"/usr/local/bin/notify-send", "-u", "normal", "\uf30c", "Welcome back, partner!", NULL,
+	"/usr/local/bin/notify-send", "-u", "normal", "Welcome", "\uf30c Welcome back, partner!", NULL,
 	NULL /* terminate */
 };
 
