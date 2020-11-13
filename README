@@ -53,6 +53,7 @@ Patches
 List of patches in use:
  - actualfullscreen
  - alwayscenter
+ - alwaysfullscreen
  - attachasideandbelow
  - cool-autostart
  - fibonacci
