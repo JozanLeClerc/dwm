@@ -9,7 +9,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
 static const char *fonts[]          = { "monospace:size=10" };
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
+static const char col_gray2[]       = "#333333";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#9d2121";
@@ -122,11 +122,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[2]} }, /* dwindle */
 	{ MODKEY|ShiftMask,             XK_t,                     setlayout,      {.v = &layouts[3]} }, /* spiral */
 	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[4]} }, /* tile */   
-	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[5]} }, /* monocle */
+	{ MODKEY,                       XK_f,                     setlayout,      {.v = &layouts[5]} }, /* monocle */
 	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[6]} }, /* floating */
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
 	{ MODKEY,                       XK_space,                 togglefloating, {0} },
-	{ MODKEY,                       XK_f,                     togglefullscr,  {0} },
+	{ MODKEY|ShiftMask,             XK_f,                     togglefullscr,  {0} },
 	{ MODKEY,                       XK_Down,                  moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ MODKEY,                       XK_Up,                    moveresize,     {.v = "0x -25y 0w 0h" } },
 	{ MODKEY,                       XK_Right,                 moveresize,     {.v = "25x 0y 0w 0h" } },
