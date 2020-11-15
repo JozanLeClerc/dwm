@@ -33,12 +33,13 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class         instance  title             tags mask  isfloating isfreesize monitor */
-	{ "Firefox",     NULL,     NULL,             1 << 2,    0,         0,         -1 },
-	{ "st-256color", NULL,     NULL,             0,         0,         0,         -1 },
-	{ "mpv",         NULL,     NULL,             0,         0,         0,         -1 },
-	{ NULL,          NULL,     "DergodsRealmII", 0,         1,         0,         -1 },
-	{ NULL,          NULL,     "Event Tester",   0,         0,         0,         -1 }, /* xev */
+	/* class         instance  title             tags mask  switchtotag   isfloating isfreesize monitor */
+	{ "Firefox",     NULL,     NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "Gimp",        NULL,     NULL,             1 << 3,    1,            0,         0,         -1 },
+	{ "st-256color", NULL,     NULL,             0,         0,            0,         0,         -1 },
+	{ "mpv",         NULL,     NULL,             0,         0,            0,         0,         -1 },
+	{ NULL,          NULL,     "DergodsRealmII", 0,         0,            1,         0,         -1 },
+	{ NULL,          NULL,     "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -98,7 +99,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_1,                     spawn,          {.v = vifmcmd } },
 	{ MODKEY,                       XK_2,                     spawn,          {.v = nvimcmd } },
 	{ MODKEY,                       XK_3,                     spawn,          {.v = ffcmd } },
-	TAGKEYS(                        XK_3,                                     2)
 	{ MODKEY,                       XK_4,                     spawn,          {.v = w3mcmd } },
 	{ MODKEY,                       XK_BackSpace,             spawn,          {.v = dmpccmd } },
 	{ 0,                            XF86XK_MonBrightnessUp,   spawn,          {.v = blinccmd } },
