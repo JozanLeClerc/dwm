@@ -128,3 +128,4 @@ flycheck_*.el
 *.rej
 *.orig
 dwm
+compile_flags.txt
