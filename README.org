@@ -59,6 +59,7 @@ List of patches in use:
 - /moveresize/
 - /movestack/
 - /noborder/
+- /nodmenu/
 - /pertag/
 - /restartsig/
 - /sizehints/

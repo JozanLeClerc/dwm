@@ -73,10 +73,9 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/usr/local/bin/dash", "-c", cmd, NULL } }
 
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 /* commands */
 static const char *termcmd[]   = { "/usr/local/bin/st", NULL };
-static const char *dmenucmd[]  = { "/usr/local/bin/dmenu_run", "-i", "-m", dmenumon, NULL };
+static const char *dmenucmd[]  = { "/usr/local/bin/dmenu_run", "-i", "-m", "0", NULL };
 static const char *dmpccmd[]   = { "/home/jozan/.local/bin/dmpc", NULL };
 static const char *vifmcmd[]   = { "/usr/local/bin/st", "-e", "/usr/local/bin/vifm", NULL };
 static const char *nvimcmd[]   = { "/usr/local/bin/st", "-e", "/usr/local/bin/nvim", NULL };
