@@ -62,6 +62,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define METAKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                          KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,                KEY,      tag,            {.ui = 1 << TAG} }, \
@@ -108,14 +109,14 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,                     togglebar,      {0} },
 	{ MODKEY,                       XK_j,                     focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,                     focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_a,                     incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_x,                     incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_a,                     incnmaster,     {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_x,                     incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,                     setmfact,       {.f = -0.025} },
 	{ MODKEY|ShiftMask,             XK_l,                     setmfact,       {.f = +0.025} },
 	{ MODKEY|ShiftMask,             XK_j,                     movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,                     movestack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,           {0} },
-	{ MODKEY,                       XK_Tab,                   view,           {0} },
+	{ METAKEY,                      XK_Escape,                view,           {0} },
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
 	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* nbtile */
 	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* nbstack */
@@ -143,8 +144,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_Down,                  moveresizeedge, {.v = "B"} },
 	{ MODKEY|ControlMask|ShiftMask, XK_Left,                  moveresizeedge, {.v = "L"} },
 	{ MODKEY|ControlMask|ShiftMask, XK_Right,                 moveresizeedge, {.v = "R"} },
-	{ MODKEY,                       XK_0,                     view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,                     tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_bracketleft,           focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_bracketright,          focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_bracketleft,           tagmon,         {.i = -1 } },
@@ -159,6 +158,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_F6,                                     5)
 	TAGKEYS(                        XK_F7,                                     6)
 	TAGKEYS(                        XK_F8,                                     7)
+	{ MODKEY,                       XK_F12,                   view,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_F12,                   tag,            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_e,                     quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,                     quit,           {1} },
 };
