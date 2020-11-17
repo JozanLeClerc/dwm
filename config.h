@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "0", "1", "2", "3", "4", "5", "6", "7" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -60,30 +60,43 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define METAKEY Mod1Mask
+#define FNKEY Mod2Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                          KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,                KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,              KEY,      tagnextmon,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask,    KEY,      tagprevmon,     {.ui = 1 << TAG} },
-	/* { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \ */
-	/* { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, \ */
+	{ MODKEY|ControlMask|ShiftMask,    KEY,      tagprevmon,     {.ui = 1 << TAG} }, \
+	{ FNKEY,                           KEY,      toggletag,      {.ui = 1 << TAG} }, \
+	{ FNKEY|ControlMask,               KEY,      toggleview,     {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/usr/local/bin/dash", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[]   = { "/usr/local/bin/st", NULL };
-static const char *dmenucmd[]  = { "/usr/local/bin/dmenu_run", "-i", "-m", "0", NULL };
-static const char *dmpccmd[]   = { "/home/jozan/.local/bin/dmpc", NULL };
-static const char *vifmcmd[]   = { "/usr/local/bin/st", "-e", "/usr/local/bin/vifm", NULL };
-static const char *nvimcmd[]   = { "/usr/local/bin/st", "-e", "/usr/local/bin/nvim", NULL };
-static const char *ffcmd[]     = { "/usr/local/bin/firefox", "--kiosk", "https://start.duckduckgo.com/", NULL };
-static const char *w3mcmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/w3m", "https://start.duckduckgo.com/", NULL };
-static const char *blinccmd[]  = { "/usr/local/bin/xbacklight", "-inc", "10", NULL };
-static const char *bldeccmd[]  = { "/usr/local/bin/xbacklight", "-dec", "10", NULL };
-static const char *volinccmd[] = { "/home/jozan/.local/bin/mixer-set", "raise", NULL };
-static const char *voldeccmd[] = { "/home/jozan/.local/bin/mixer-set", "lower", NULL };
-static const char *voltogcmd[] = { "/home/jozan/.local/bin/mixer-set", "toggle", NULL };
+static const char *termcmd[]    = { "/usr/local/bin/st", NULL };
+static const char *dmenucmd[]   = { "/usr/local/bin/dmenu_run", "-i", "-m", "0", NULL };
+static const char *dmpccmd[]    = { "/home/jozan/.local/bin/dmpc", NULL };
+static const char *vifmcmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/vifm", NULL };
+static const char *nvimcmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/nvim", NULL };
+static const char *ffcmd[]      = { "/usr/local/bin/firefox", "--kiosk", "https://start.duckduckgo.com/", NULL };
+static const char *w3mcmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/w3m", "https://start.duckduckgo.com/", NULL };
+static const char *nbcmd[]      = { "/usr/local/bin/st", "-e", "/usr/local/bin/newsboat", NULL };
+static const char *vimpccmd[]   = { "/usr/local/bin/st", "-e", "/usr/local/bin/vimpc", NULL };
+static const char *calcmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/calcurse", "-C", "/home/jozan/.config/calcurse", "-D", "/home/jozan/.local/share/calcurse", NULL };
+static const char *sclicmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/scli", NULL };
+static const char *muttcmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/neomutt", NULL };
+static const char *gotopcmd[]   = { "/usr/local/bin/st", "-e", "/usr/local/bin/gotop", NULL };
+static const char *htopcmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/htop", NULL };
+static const char *topcmd[]     = { "/usr/local/bin/st", "-e", "/usr/bin/top", NULL };
+static const char *blinccmd[]   = { "/usr/local/bin/xbacklight", "-inc", "10", NULL };
+static const char *bldeccmd[]   = { "/usr/local/bin/xbacklight", "-dec", "10", NULL };
+static const char *voltogcmd[]  = { "/home/jozan/.local/bin/mixer-set", "toggle", NULL };
+static const char *voldeccmd[]  = { "/home/jozan/.local/bin/mixer-set", "lower", NULL };
+static const char *volinccmd[]  = { "/home/jozan/.local/bin/mixer-set", "raise", NULL };
+static const char *mpcprevcmd[] = { "/usr/local/bin/mpc", "prev", NULL };
+static const char *mpcnextcmd[] = { "/usr/local/bin/mpc", "next", NULL };
+static const char *mpctogcmd[]  = { "/usr/local/bin/mpc", "toggle", NULL };
+static const char *mpcstopcmd[] = { "/usr/local/bin/mpc", "stop", NULL };
 
 #include "movestack.c"
 #include <X11/XF86keysym.h>
@@ -92,10 +105,25 @@ static Key keys[] = {
 	/* modifier                     key                       function        argument */
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_1,                     spawn,          {.v = vifmcmd } },
-	{ MODKEY,                       XK_2,                     spawn,          {.v = nvimcmd } },
-	{ MODKEY,                       XK_3,                     spawn,          {.v = ffcmd } },
-	{ MODKEY,                       XK_4,                     spawn,          {.v = w3mcmd } },
+	{ MODKEY,                       XK_F1,                    spawn,          {.v = vifmcmd } },
+	{ MODKEY,                       XK_F2,                    spawn,          {.v = nvimcmd } },
+	{ MODKEY,                       XK_F3,                    spawn,          {.v = ffcmd } },
+	{ MODKEY,                       XK_F4,                    spawn,          {.v = w3mcmd } },
+	{ MODKEY,                       XK_F5,                    spawn,          {.v = nbcmd } },
+	{ MODKEY,                       XK_F6,                    spawn,          {.v = vimpccmd } },
+	{ MODKEY,                       XK_F7,                    spawn,          {.v = calcmd } },
+	{ MODKEY,                       XK_F8,                    spawn,          {.v = sclicmd } },
+	{ MODKEY,                       XK_F9,                    spawn,          {.v = muttcmd } },
+	{ MODKEY,                       XK_F10,                   spawn,          {.v = gotopcmd } },
+	{ MODKEY,                       XK_F11,                   spawn,          {.v = htopcmd } },
+	{ MODKEY,                       XK_F12,                   spawn,          {.v = topcmd } },
+	{ FNKEY,                        XK_F6,                    spawn,          {.v = mpcprevcmd } },
+	{ FNKEY,                        XK_F7,                    spawn,          {.v = mpctogcmd } },
+	{ FNKEY,                        XK_F8,                    spawn,          {.v = mpcnextcmd } },
+	{ FNKEY,                        XK_F9,                    spawn,          {.v = mpcstopcmd } },
+	{ FNKEY,                        XK_F10,                   spawn,          {.v = voltogcmd } },
+	{ FNKEY,                        XK_F11,                   spawn,          {.v = volinccmd } },
+	{ FNKEY,                        XK_F12,                   spawn,          {.v = voldeccmd } },
 	{ MODKEY,                       XK_BackSpace,             spawn,          {.v = dmpccmd } },
 	{ 0,                            XF86XK_MonBrightnessUp,   spawn,          {.v = blinccmd } },
 	{ 0,                            XF86XK_MonBrightnessDown, spawn,          {.v = bldeccmd } },
@@ -148,16 +176,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_bracketright,          tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_h,                     focusmon,       {.i = +1 } },
 	{ MODKEY,                       XK_l,                     focusmon,       {.i = -1 } },
-	TAGKEYS(                        XK_F1,                                     0)
-	TAGKEYS(                        XK_F2,                                     1)
-	TAGKEYS(                        XK_F3,                                     2)
-	TAGKEYS(                        XK_F4,                                     3)
-	TAGKEYS(                        XK_F5,                                     4)
-	TAGKEYS(                        XK_F6,                                     5)
-	TAGKEYS(                        XK_F7,                                     6)
-	TAGKEYS(                        XK_F8,                                     7)
-	{ MODKEY,                       XK_F12,                   view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_F12,                   tag,            {.ui = ~0 } },
+	TAGKEYS(                        XK_1,                                     0)
+	TAGKEYS(                        XK_2,                                     1)
+	TAGKEYS(                        XK_3,                                     2)
+	TAGKEYS(                        XK_4,                                     3)
+	TAGKEYS(                        XK_5,                                     4)
+	TAGKEYS(                        XK_6,                                     5)
+	TAGKEYS(                        XK_7,                                     6)
+	TAGKEYS(                        XK_8,                                     7)
+	{ MODKEY,                       XK_0,                     view,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_0,                     tag,            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_e,                     quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,                     quit,           {1} },
 };
