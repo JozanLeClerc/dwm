@@ -65,6 +65,7 @@ List of patches in use:
  - nodmenu
  - pertag
  - restartsig
+ - savefloats
  - sizehints
  - switchtotag
  - tagothermon
