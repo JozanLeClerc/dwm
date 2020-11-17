@@ -48,6 +48,8 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "-|=",      ntile },
 	{ "-|-",      nbstack },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
  	{ "[\\]",     dwindle },
  	{ "[@]",      spiral },
 	{ "[]=",      tile },    /* first entry is default */
@@ -114,11 +116,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
 	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* nbtile */
 	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* nbstack */
-	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[2]} }, /* dwindle */
-	{ MODKEY|ShiftMask,             XK_t,                     setlayout,      {.v = &layouts[3]} }, /* spiral */
-	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[4]} }, /* tile */   
-	{ MODKEY,                       XK_f,                     setlayout,      {.v = &layouts[5]} }, /* monocle */
-	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[6]} }, /* floating */
+	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[2]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[3]} }, /* centeredfloatingmaster */
+	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[4]} }, /* dwindle */
+	{ MODKEY|ShiftMask,             XK_t,                     setlayout,      {.v = &layouts[5]} }, /* spiral */
+	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[6]} }, /* tile */   
+	{ MODKEY,                       XK_f,                     setlayout,      {.v = &layouts[7]} }, /* monocle */
+	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[8]} }, /* floating */
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
 	{ MODKEY,                       XK_space,                 togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,                     togglefullscr,  {0} },
