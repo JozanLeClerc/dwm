@@ -52,7 +52,6 @@ List of patches in use:
 - /alwayscenter/
 - /alwaysfullscreen/
 - /attachasideandbelow/
-- /cool-autostart/
 - /fibonacci/
 - /focusonclick/
 - /nmaster/

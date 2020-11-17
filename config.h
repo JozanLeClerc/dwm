@@ -19,12 +19,6 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
-static const char *const autostart[] = {
-	"/home/jozan/.config/dwm/dwmrc", NULL,
-	"/usr/local/bin/notify-send", "-u", "normal", "Welcome", "\uf30c Welcome back, partner!", NULL,
-	NULL /* terminate */
-};
-
 /* tagging */
 static const char *tags[] = { "0", "1", "2", "3", "4", "5", "6", "7" };
 

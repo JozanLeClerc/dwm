@@ -127,5 +127,6 @@ flycheck_*.el
 *.def.h
 *.rej
 *.orig
+.ccls*
 dwm
 compile_flags.txt
