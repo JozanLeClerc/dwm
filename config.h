@@ -27,17 +27,17 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class         instance  title             tags mask  switchtotag   isfloating isfreesize monitor */
-	{ "Firefox",     NULL,     NULL,             1 << 2,    1,            0,         0,         -1 },
-	{ "Gimp",        NULL,     NULL,             1 << 3,    1,            0,         0,         -1 },
-	{ "st-256color", NULL,     NULL,             0,         0,            0,         0,         -1 },
-	{ "mpv",         NULL,     NULL,             0,         0,            0,         0,         -1 },
-	{ NULL,          NULL,     "DergodsRealmII", 0,         0,            1,         0,         -1 },
-	{ NULL,          NULL,     "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
+	/* class               instance  title             tags mask  switchtotag   isfloating isfreesize monitor */
+	{ "Firefox",           NULL,     NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "Chromium-browser",  NULL,     NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "Gimp",              NULL,     NULL,             1 << 3,    1,            0,         0,         -1 },
+	{ "st-256color",       NULL,     NULL,             0,         0,            0,         0,         -1 },
+	{ "mpv",               NULL,     NULL,             0,         0,            0,         0,         -1 },
+	{ NULL,                NULL,     "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
@@ -60,14 +60,13 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define METAKEY Mod1Mask
-#define FNKEY Mod2Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                          KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,                KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,              KEY,      tagnextmon,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask,    KEY,      tagprevmon,     {.ui = 1 << TAG} }, \
-	{ FNKEY,                           KEY,      toggletag,      {.ui = 1 << TAG} }, \
-	{ FNKEY|ControlMask,               KEY,      toggleview,     {.ui = 1 << TAG} },
+	{ MODKEY|METAKEY,                  KEY,      toggletag,      {.ui = 1 << TAG} }, \
+	{ MODKEY|METAKEY|ControlMask,      KEY,      toggleview,     {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/usr/local/bin/dash", "-c", cmd, NULL } }
@@ -77,8 +76,8 @@ static const char *termcmd[]    = { "/usr/local/bin/st", NULL };
 static const char *dmenucmd[]   = { "/usr/local/bin/dmenu_run", "-i", "-m", "0", NULL };
 static const char *dmpccmd[]    = { "/home/jozan/.local/bin/dmpc", NULL };
 static const char *vifmcmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/vifm", NULL };
-static const char *nvimcmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/nvim", NULL };
-static const char *ffcmd[]      = { "/usr/local/bin/firefox", "--kiosk", "https://start.duckduckgo.com/", NULL };
+static const char *editcmd[]    = { "/usr/local/bin/emacsclient", "-c", NULL };
+static const char *browsercmd[] = { "/usr/local/bin/iridium", NULL };
 static const char *w3mcmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/w3m", "https://start.duckduckgo.com/", NULL };
 static const char *nbcmd[]      = { "/usr/local/bin/st", "-e", "/usr/local/bin/newsboat", NULL };
 static const char *vimpccmd[]   = { "/usr/local/bin/st", "-e", "/usr/local/bin/vimpc", NULL };
@@ -106,8 +105,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_F1,                    spawn,          {.v = vifmcmd } },
-	{ MODKEY,                       XK_F2,                    spawn,          {.v = nvimcmd } },
-	{ MODKEY,                       XK_F3,                    spawn,          {.v = ffcmd } },
+	{ MODKEY,                       XK_F2,                    spawn,          {.v = editcmd } },
+	{ MODKEY,                       XK_F3,                    spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_F4,                    spawn,          {.v = w3mcmd } },
 	{ MODKEY,                       XK_F5,                    spawn,          {.v = nbcmd } },
 	{ MODKEY,                       XK_F6,                    spawn,          {.v = vimpccmd } },
