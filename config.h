@@ -27,13 +27,14 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class               instance  title             tags mask  switchtotag   isfloating isfreesize monitor */
-	{ "Firefox",           NULL,     NULL,             1 << 2,    1,            0,         0,         -1 },
-	{ "Chromium-browser",  NULL,     NULL,             1 << 2,    1,            0,         0,         -1 },
-	{ "Gimp",              NULL,     NULL,             1 << 3,    1,            0,         0,         -1 },
-	{ "st-256color",       NULL,     NULL,             0,         0,            0,         0,         -1 },
-	{ "mpv",               NULL,     NULL,             0,         0,            0,         0,         -1 },
-	{ NULL,                NULL,     "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
+	/* class               instance                     title             tags mask  switchtotag   isfloating isfreesize monitor */
+	{ "Firefox",           NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "Chromium-browser",  NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "Gimp",              NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
+	{ NULL,                "org.inkscape.Inkscape",     NULL,             1 << 3,    1,            0,         0,         -1 },
+	{ "xterm-256color",    NULL,                        NULL,             0,         0,            0,         0,         -1 },
+	{ "mpv",               NULL,                        NULL,             0,         0,            0,         0,         -1 },
+	{ NULL,                NULL,                        "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -77,7 +78,7 @@ static const char *dmenucmd[]   = { "/usr/local/bin/dmenu_run", "-i", "-m", "0",
 static const char *dmpccmd[]    = { "/home/jozan/.local/bin/dmpc", NULL };
 static const char *vifmcmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/vifm", NULL };
 static const char *editcmd[]    = { "/usr/local/bin/emacsclient", "-c", NULL };
-static const char *browsercmd[] = { "/usr/local/bin/iridium", NULL };
+static const char *browsercmd[] = { "/usr/local/bin/torify", "/usr/local/bin/iridium", NULL };
 static const char *w3mcmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/w3m", "https://start.duckduckgo.com/", NULL };
 static const char *nbcmd[]      = { "/usr/local/bin/st", "-e", "/usr/local/bin/newsboat", NULL };
 static const char *vimpccmd[]   = { "/usr/local/bin/st", "-e", "/usr/local/bin/vimpc", NULL };
