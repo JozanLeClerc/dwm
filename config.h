@@ -27,14 +27,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class               instance                     title             tags mask  switchtotag   isfloating isfreesize monitor */
-	{ "Firefox",           NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
-	{ "Chromium-browser",  NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
-	{ "Gimp",              NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
-	{ NULL,                "org.inkscape.Inkscape",     NULL,             1 << 3,    1,            0,         0,         -1 },
-	{ "xterm-256color",    NULL,                        NULL,             0,         0,            0,         0,         -1 },
-	{ "mpv",               NULL,                        NULL,             0,         0,            0,         0,         -1 },
-	{ NULL,                NULL,                        "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
+	/* class                 instance                     title             tags mask  switchtotag   isfloating isfreesize monitor */
+	{ "Firefox",             NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "Chromium-browser",    NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "VirtualBox Manager",  NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
+	{ "Gimp",                NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
+	{ "Audacity",            NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
+	{ NULL,                  "org.inkscape.Inkscape",     NULL,             1 << 3,    1,            0,         0,         -1 },
+	{ "xterm-256color",      NULL,                        NULL,             0,         0,            0,         0,         -1 },
+	{ "mpv",                 NULL,                        NULL,             0,         0,            0,         0,         -1 },
+	{ NULL,                  NULL,                        "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
 };
 
 /* layout(s) */
