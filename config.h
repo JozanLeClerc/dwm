@@ -105,6 +105,7 @@ static const char *mpcprevcmd[]  = { "/usr/local/bin/mpc", "prev", NULL };
 static const char *mpcnextcmd[]  = { "/usr/local/bin/mpc", "next", NULL };
 static const char *mpctogcmd[]   = { "/usr/local/bin/mpc", "toggle", NULL };
 static const char *mpcstopcmd[]  = { "/usr/local/bin/mpc", "stop", NULL };
+static const char *killespeak[]  = { "/bin/pkill", "espeak", NULL };
 
 #include "movestack.c"
 #include <X11/XF86keysym.h>
@@ -143,6 +144,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,          {.v = volinccmd } },
 	{ 0,                            XF86XK_AudioLowerVolume,  spawn,          {.v = voldeccmd } },
 	{ 0,                            XF86XK_AudioMute,         spawn,          {.v = voltogcmd } },
+	{ 0,                            XK_Pause,                 spawn,          {.v = killespeak } },
 	{ MODKEY,                       XK_b,                     togglebar,      {0} },
 	{ MODKEY,                       XK_j,                     focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,                     focusstack,     {.i = -1 } },
