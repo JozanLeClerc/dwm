@@ -83,7 +83,7 @@ static const char *dmkillcmd[]   = { "/home/jozan/.local/bin/dmkill", NULL };
 static const char *dmsearchcmd[] = { "/home/jozan/.local/bin/dmsearch", NULL };
 static const char *dmscrotcmd[]  = { "/home/jozan/.local/bin/dmscrot", NULL };
 static const char *dmlogcmd[]    = { "/home/jozan/.local/bin/dmlog", NULL };
-static const char *vifmcmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/vifm", NULL };
+static const char *filecmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/lf", NULL };
 static const char *editcmd[]     = { "/usr/local/bin/emacsclient", "-c", NULL };
 static const char *browsercmd[]  = { "/usr/local/bin/firefox", "--kiosk", "https://start.duckduckgo.com/", NULL };
 static const char *torbrocmd[]   = { "/usr/local/bin/torify", "/usr/local/bin/firefox", "--kiosk", "https://start.duckduckgo.com/", NULL };
@@ -114,7 +114,7 @@ static Key keys[] = {
 	/* modifier                     key                       function        argument */
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_F1,                    spawn,          {.v = vifmcmd } },
+	{ MODKEY,                       XK_F1,                    spawn,          {.v = filecmd } },
 	{ MODKEY,                       XK_F2,                    spawn,          {.v = editcmd } },
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browsercmd } },
 	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = torbrocmd } },
