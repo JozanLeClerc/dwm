@@ -28,7 +28,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class                 instance                     title             tags mask  switchtotag   isfloating isfreesize monitor */
-	{ "Firefox",             NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "firefox",             NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
 	{ "Chromium-browser",    NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
 	{ "VirtualBox Manager",  NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
 	{ "Gimp",                NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
@@ -36,6 +36,7 @@ static const Rule rules[] = {
 	{ NULL,                  "org.inkscape.Inkscape",     NULL,             1 << 3,    1,            0,         0,         -1 },
 	{ "xterm-256color",      NULL,                        NULL,             0,         0,            0,         0,         -1 },
 	{ "mpv",                 NULL,                        NULL,             0,         0,            0,         0,         -1 },
+	{ "Alacritty",           NULL,                        NULL,             0,         0,            0,         0,         -1 },
 	{ NULL,                  NULL,                        "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
 };
 
@@ -87,8 +88,8 @@ static const char *editcmd[]     = { "/usr/local/bin/emacsclient", "-c", NULL };
 static const char *browsercmd[]  = { "/usr/local/bin/firefox", "--kiosk", "https://start.duckduckgo.com/", NULL };
 static const char *torbrocmd[]   = { "/usr/local/bin/torify", "/usr/local/bin/firefox", "--kiosk", "https://start.duckduckgo.com/", NULL };
 static const char *w3mcmd[]      = { "/usr/local/bin/st", "-e", "/usr/local/bin/w3m", "https://start.duckduckgo.com/", NULL };
-static const char *nbcmd[]       = { "/usr/local/bin/st", "-e", "/usr/local/bin/torify", "/usr/local/bin/newsboat", NULL };
-static const char *vimpccmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/vimpc", NULL };
+static const char *nbcmd[]       = { "/usr/local/bin/st", "-e", "/usr/local/bin/newsboat", NULL };
+static const char *ncmpccmd[]    = { "/usr/local/bin/st", "-e", "/usr/local/bin/ncmpc", NULL };
 static const char *calcmd[]      = { "/usr/local/bin/st", "-e", "/usr/local/bin/calcurse", "-C", "/home/jozan/.config/calcurse", "-D", "/home/jozan/.local/share/calcurse", NULL };
 static const char *sclicmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/scli", NULL };
 static const char *muttcmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/neomutt", NULL };
@@ -114,11 +115,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return,                spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_F1,                    spawn,          {.v = vifmcmd } },
 	{ MODKEY,                       XK_F2,                    spawn,          {.v = editcmd } },
-	{ MODKEY,                       XK_F3,                    spawn,          {.v = torbrocmd } },
-	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = browsercmd } },
+	{ MODKEY,                       XK_F3,                    spawn,          {.v = browsercmd } },
+	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = torbrocmd } },
 	{ MODKEY,                       XK_F4,                    spawn,          {.v = w3mcmd } },
 	{ MODKEY,                       XK_F5,                    spawn,          {.v = nbcmd } },
-	{ MODKEY,                       XK_F6,                    spawn,          {.v = vimpccmd } },
+	{ MODKEY,                       XK_F6,                    spawn,          {.v = ncmpccmd } },
 	{ MODKEY,                       XK_F7,                    spawn,          {.v = calcmd } },
 	{ MODKEY,                       XK_F8,                    spawn,          {.v = sclicmd } },
 	{ MODKEY,                       XK_F9,                    spawn,          {.v = muttcmd } },
