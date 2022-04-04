@@ -29,7 +29,7 @@ static const Rule rules[] = {
 	 */
 	/* class                 instance                     title             tags mask  switchtotag   isfloating isfreesize monitor */
 	{ "firefox",             NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
-	{ "Chromium-browser",    NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
+	{ "Chromium-browser",    NULL,                        NULL,             1 << 7,    1,            0,         0,         -1 },
 	{ "VirtualBox Manager",  NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
 	{ "Gimp",                NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
 	{ "Audacity",            NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
