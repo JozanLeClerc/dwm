@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 0;        /* 0 means no bar */
@@ -136,7 +136,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_F10,                   spawn,          {.v = voltogcmd } },
 	{ MODKEY|ShiftMask,             XK_F11,                   spawn,          {.v = voldeccmd } },
 	{ MODKEY|ShiftMask,             XK_F12,                   spawn,          {.v = volinccmd } },
-	{ MODKEY|ShiftMask,             XK_Home,                  spawn,          {.v = miccmd } },
+	{ MODKEY|ShiftMask,             XK_Delete,                spawn,          {.v = miccmd } },
 	{ MODKEY|ControlMask,           XK_F9,                    spawn,          {.v = dmkillcmd } },
 	{ MODKEY|ControlMask,           XK_F10,                   spawn,          {.v = dmscrotcmd } },
 	{ MODKEY|ControlMask,           XK_F11,                   spawn,          {.v = dmsearchcmd } },
