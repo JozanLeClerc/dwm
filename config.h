@@ -28,16 +28,13 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class                 instance                     title             tags mask  switchtotag   isfloating isfreesize monitor */
-	{ "firefox",             NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 },
-	{ "Chromium-browser",    NULL,                        NULL,             1 << 7,    1,            0,         0,         -1 },
-	{ "VirtualBox Manager",  NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
-	{ "Gimp",                NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
-	{ "Audacity",            NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 },
-	{ NULL,                  "org.inkscape.Inkscape",     NULL,             1 << 3,    1,            0,         0,         -1 },
 	{ "xterm-256color",      NULL,                        NULL,             0,         0,            0,         0,         -1 },
 	{ "mpv",                 NULL,                        NULL,             0,         0,            0,         0,         -1 },
 	{ "Alacritty",           NULL,                        NULL,             0,         0,            0,         0,         -1 },
 	{ NULL,                  NULL,                        "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
+	/* { NULL,                  "org.inkscape.Inkscape",     NULL,             1 << 3,    1,            0,         0,         -1 }, */
+	/* { "firefox",             NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 }, */
+	/* { "Audacity",            NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 }, */
 };
 
 /* layout(s) */
@@ -83,6 +80,8 @@ static const char *dmkillcmd[]   = { "/home/jozan/.local/bin/dmkill", NULL };
 static const char *dmsearchcmd[] = { "/home/jozan/.local/bin/dmsearch", NULL };
 static const char *dmscrotcmd[]  = { "/home/jozan/.local/bin/dmscrot", NULL };
 static const char *dmlogcmd[]    = { "/home/jozan/.local/bin/dmlog", NULL };
+static const char *dmpasstcmd[]  = { "/home/jozan/.local/bin/dmpass", "--type", NULL };
+static const char *dmpasscmd[]   = { "/home/jozan/.local/bin/dmpass", NULL };
 static const char *ndatecmd[]    = { "/home/jozan/.local/bin/ndate", NULL };
 static const char *filecmd[]     = { "/usr/local/bin/st", "-e", "/usr/local/bin/zsh", "-ic", "/usr/local/bin/lf", NULL };
 static const char *editcmd[]     = { "/usr/local/bin/emacsclient", "-c", NULL };
@@ -143,6 +142,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_F12,                   spawn,          {.v = dmlogcmd } },
 	{ MODKEY|ControlMask,           XK_BackSpace,             spawn,          {.v = dmlogcmd } },
 	{ MODKEY,                       XK_BackSpace,             spawn,          {.v = dmpccmd } },
+	{ MODKEY|ShiftMask,             XK_p,                     spawn,          {.v = dmpasstcmd } },
+	{ MODKEY|ControlMask,           XK_p,                     spawn,          {.v = dmpasscmd } },
 	{ MODKEY,                       XK_End,                   spawn,          {.v = ndatecmd } },
 	{ 0,                            XF86XK_MonBrightnessUp,   spawn,          {.v = blinccmd } },
 	{ 0,                            XF86XK_MonBrightnessDown, spawn,          {.v = bldeccmd } },
