@@ -70,7 +70,7 @@ static const Layout layouts[] = {
 	{ MODKEY|METAKEY|ControlMask,      KEY,      toggleview,     {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/usr/local/bin/dash", "-c", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static const char *termcmd[]       = { "/usr/local/bin/st", NULL };
