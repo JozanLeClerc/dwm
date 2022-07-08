@@ -31,6 +31,7 @@ static const Rule rules[] = {
 	{ "xterm-256color",      NULL,                        NULL,             0,         0,            0,         0,         -1 },
 	{ "mpv",                 NULL,                        NULL,             0,         0,            0,         0,         -1 },
 	{ "Alacritty",           NULL,                        NULL,             0,         0,            0,         0,         -1 },
+	{ "KeePass2",            NULL,                        NULL,             0,         0,            1,         0,         -1 },
 	{ NULL,                  NULL,                        "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
 	/* { NULL,                  "org.inkscape.Inkscape",     NULL,             1 << 3,    1,            0,         0,         -1 }, */
 	/* { "firefox",             NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 }, */
