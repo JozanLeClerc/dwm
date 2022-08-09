@@ -3,13 +3,13 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
 static const char *fonts[]          = { "monospace:size=10" };
+static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#333333";
+static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#9d2121";
@@ -20,41 +20,34 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class                 instance                     title             tags mask  switchtotag   isfloating isfreesize monitor */
-	{ "xterm-256color",      NULL,                        NULL,             0,         0,            0,         0,         -1 },
-	{ "mpv",                 NULL,                        NULL,             0,         0,            0,         0,         -1 },
-	{ "Alacritty",           NULL,                        NULL,             0,         0,            0,         0,         -1 },
-	{ "KeePass2",            NULL,                        NULL,             0,         0,            1,         0,         -1 },
-	{ NULL,                  NULL,                        "Event Tester",   0,         0,            0,         0,         -1 }, /* xev */
-	/* { NULL,                  "org.inkscape.Inkscape",     NULL,             1 << 3,    1,            0,         0,         -1 }, */
-	/* { "firefox",             NULL,                        NULL,             1 << 2,    1,            0,         0,         -1 }, */
-	/* { "Audacity",            NULL,                        NULL,             1 << 3,    1,            0,         0,         -1 }, */
+	/* class             instance    title             tags mask     switchtotag,   isfloating   isfreesize   monitor */
+	{ "st",              NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "St",              NULL,       NULL,             0,            0,             0,           0,           -1 }, /* St with Xresources patch */
+	{ "xterm-256color",  NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "mpv",             NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "Alacritty",       NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "KeePass2",        NULL,       NULL,             0,            0,             1,           0,           -1 },
+	{ NULL,              NULL,       "Event Tester",   0,            0,             0,           0,           -1 }, /* xev */
 };
 
 /* layout(s) */
-static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
-
-#include "nmaster.c"
-#include "fibonacci.c"
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "-|=",      ntile },
-	{ "-|-",      nbstack },
+	{ "[]=",      tile },    /* first entry is default */
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
- 	{ "[\\]",     dwindle },
- 	{ "[@]",      spiral },
-	{ "[]=",      tile },    /* first entry is default */
 	{ "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
@@ -63,19 +56,20 @@ static const Layout layouts[] = {
 #define MODKEY Mod4Mask
 #define METAKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                          KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,                KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,              KEY,      tagprevmon,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask,    KEY,      tagnextmon,     {.ui = 1 << TAG} }, \
-	{ MODKEY|METAKEY,                  KEY,      toggletag,      {.ui = 1 << TAG} }, \
-	{ MODKEY|METAKEY|ControlMask,      KEY,      toggleview,     {.ui = 1 << TAG} },
+	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask,           KEY,      tagprevmon,     {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask|ShiftMask, KEY,      tagnextmon,     {.ui = 1 << TAG} }, \
+	{ MODKEY|METAKEY,               KEY,      toggletag,      {.ui = 1 << TAG} }, \
+	{ MODKEY|METAKEY|ControlMask,   KEY,      toggleview,     {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[]       = { "/usr/local/bin/alacritty", NULL };
-static const char *dmenucmd[]      = { "/usr/local/bin/dmenu_run", "-i", "-m", "0", NULL };
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *termcmd[]       = { "alacritty", NULL };
+static const char *dmenucmd[]      = { "dmenu_run", "-i", "-m", "0", NULL };
 static const char *dmpccmd[]       = { "/home/jozan/.local/bin/dmpc", NULL };
 static const char *dmkillcmd[]     = { "/home/jozan/.local/bin/dmkill", NULL };
 static const char *dmsearchcmd[]   = { "/home/jozan/.local/bin/dmsearch", NULL };
@@ -85,36 +79,35 @@ static const char *dmpassfullcmd[] = { "/home/jozan/.local/bin/dmpass", "--full"
 static const char *dmpasscmd[]     = { "/home/jozan/.local/bin/dmpass", NULL };
 static const char *dmotpcmd[]      = { "/home/jozan/.local/bin/dmotp", NULL };
 static const char *ndatecmd[]      = { "/home/jozan/.local/bin/ndate", NULL };
-static const char *filecmd[]       = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/zsh", "-ic", "/usr/local/bin/lf", NULL };
-static const char *editcmd[]       = { "/usr/local/bin/emacsclient", "-c", NULL };
-static const char *browsercmd[]    = { "/usr/local/bin/iridium", "--force-dark-mode", NULL };
-static const char *torbrocmd[]     = { "/usr/local/bin/torify", "/usr/local/bin/iridium", "--force-dark-mode", NULL };
-static const char *w3mcmd[]        = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/w3m", "https://start.duckduckgo.com/", NULL };
-static const char *nbcmd[]         = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/newsboat", NULL };
-static const char *ncmpccmd[]      = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/ncmpc", NULL };
-static const char *calcmd[]        = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/calcurse", "-C", "/home/jozan/.config/calcurse", "-D", "/home/jozan/.local/share/calcurse", NULL };
-static const char *sclicmd[]       = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/scli", NULL };
-static const char *muttcmd[]       = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/neomutt", NULL };
-static const char *gotopcmd[]      = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/gotop", NULL };
-static const char *htopcmd[]       = { "/usr/local/bin/alacritty", "-e", "/usr/local/bin/htop", NULL };
-static const char *topcmd[]        = { "/usr/local/bin/alacritty", "-e", "/usr/bin/top", NULL };
-static const char *blinccmd[]      = { "/usr/local/bin/xbacklight", "-inc", "10", NULL };
-static const char *bldeccmd[]      = { "/usr/local/bin/xbacklight", "-dec", "10", NULL };
+static const char *filecmd[]       = { "alacritty", "-e", "zsh", "-ic", "lf", NULL };
+static const char *editcmd[]       = { "emacsclient", "-c", NULL };
+static const char *browsercmd[]    = { "iridium", "--force-dark-mode", NULL };
+static const char *torbrocmd[]     = { "torify", "iridium", "--force-dark-mode", NULL };
+static const char *w3mcmd[]        = { "alacritty", "-e", "w3m", "https://start.duckduckgo.com/", NULL };
+static const char *nbcmd[]         = { "alacritty", "-e", "newsboat", NULL };
+static const char *ncmpccmd[]      = { "alacritty", "-e", "ncmpc", NULL };
+static const char *calcmd[]        = { "alacritty", "-e", "calcurse", "-C", "/home/jozan/.config/calcurse", "-D", "/home/jozan/.local/share/calcurse", NULL };
+static const char *sclicmd[]       = { "alacritty", "-e", "scli", NULL };
+static const char *muttcmd[]       = { "alacritty", "-e", "neomutt", NULL };
+static const char *gotopcmd[]      = { "alacritty", "-e", "gotop", NULL };
+static const char *htopcmd[]       = { "alacritty", "-e", "htop", NULL };
+static const char *topcmd[]        = { "alacritty", "-e", "top", NULL };
+static const char *blinccmd[]      = { "xbacklight", "-inc", "10", NULL };
+static const char *bldeccmd[]      = { "xbacklight", "-dec", "10", NULL };
 static const char *voltogcmd[]     = { "/home/jozan/.local/bin/mixer-set", "toggle", NULL };
 static const char *voldeccmd[]     = { "/home/jozan/.local/bin/mixer-set", "lower", NULL };
 static const char *volinccmd[]     = { "/home/jozan/.local/bin/mixer-set", "raise", NULL };
 static const char *miccmd[]        = { "/home/jozan/.local/bin/mic", NULL };
-static const char *mpcprevcmd[]    = { "/usr/local/bin/mpc", "prev", NULL };
-static const char *mpcnextcmd[]    = { "/usr/local/bin/mpc", "next", NULL };
-static const char *mpctogcmd[]     = { "/usr/local/bin/mpc", "toggle", NULL };
-static const char *mpcstopcmd[]    = { "/usr/local/bin/mpc", "stop", NULL };
+static const char *mpcprevcmd[]    = { "mpc", "prev", NULL };
+static const char *mpcnextcmd[]    = { "mpc", "next", NULL };
+static const char *mpctogcmd[]     = { "mpc", "toggle", NULL };
+static const char *mpcstopcmd[]    = { "mpc", "stop", NULL };
 static const char *killespeak[]    = { "/home/jozan/.local/bin/shutup", NULL };
 
 #include "movestack.c"
 #include <X11/XF86keysym.h>
-
 static Key keys[] = {
-	/* modifier                     key                       function        argument */
+	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_F1,                    spawn,          {.v = filecmd } },
@@ -161,6 +154,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,                     togglebar,      {0} },
 	{ MODKEY,                       XK_j,                     focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,                     focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_i,                     incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_d,                     incnmaster,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_a,                     incnmaster,     {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_x,                     incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,                     setmfact,       {.f = -0.025} },
@@ -170,34 +165,14 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,           {0} },
 	{ METAKEY,                      XK_Escape,                view,           {0} },
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
-	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* nbtile */
-	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* nbstack */
-	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[2]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[3]} }, /* centeredfloatingmaster */
-	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[4]} }, /* dwindle */
-	{ MODKEY|ShiftMask,             XK_t,                     setlayout,      {.v = &layouts[5]} }, /* spiral */
-	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[6]} }, /* tile */   
-	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[7]} }, /* monocle */
-	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[8]} }, /* floating */
+	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* tile */
+	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[1]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[2]} }, /* centeredfloatingmaster */
+	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[3]} }, /* monocle */
+	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[4]} }, /* floating */
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
 	{ MODKEY,                       XK_space,                 togglefloating, {0} },
 	{ MODKEY,                       XK_f,                     togglefullscr,  {0} },
-	{ MODKEY,                       XK_Down,                  moveresize,     {.v = "0x 25y 0w 0h" } },
-	{ MODKEY,                       XK_Up,                    moveresize,     {.v = "0x -25y 0w 0h" } },
-	{ MODKEY,                       XK_Right,                 moveresize,     {.v = "25x 0y 0w 0h" } },
-	{ MODKEY,                       XK_Left,                  moveresize,     {.v = "-25x 0y 0w 0h" } },
-	{ MODKEY|ShiftMask,             XK_Down,                  moveresize,     {.v = "0x 0y 0w 25h" } },
-	{ MODKEY|ShiftMask,             XK_Up,                    moveresize,     {.v = "0x 0y 0w -25h" } },
-	{ MODKEY|ShiftMask,             XK_Right,                 moveresize,     {.v = "0x 0y 25w 0h" } },
-	{ MODKEY|ShiftMask,             XK_Left,                  moveresize,     {.v = "0x 0y -25w 0h" } },
-	{ MODKEY|ControlMask,           XK_Up,                    moveresizeedge, {.v = "t"} },
-	{ MODKEY|ControlMask,           XK_Down,                  moveresizeedge, {.v = "b"} },
-	{ MODKEY|ControlMask,           XK_Left,                  moveresizeedge, {.v = "l"} },
-	{ MODKEY|ControlMask,           XK_Right,                 moveresizeedge, {.v = "r"} },
-	{ MODKEY|ControlMask|ShiftMask, XK_Up,                    moveresizeedge, {.v = "T"} },
-	{ MODKEY|ControlMask|ShiftMask, XK_Down,                  moveresizeedge, {.v = "B"} },
-	{ MODKEY|ControlMask|ShiftMask, XK_Left,                  moveresizeedge, {.v = "L"} },
-	{ MODKEY|ControlMask|ShiftMask, XK_Right,                 moveresizeedge, {.v = "R"} },
 	{ MODKEY,                       XK_bracketleft,           focusmon,       {.i = +1 } },
 	{ MODKEY,                       XK_bracketright,          focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_h,                     focusmon,       {.i = +1 } },
@@ -218,10 +193,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_6,                                     5)
 	TAGKEYS(                        XK_7,                                     6)
 	TAGKEYS(                        XK_8,                                     7)
-	{ MODKEY,                       XK_0,                     view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,                     tag,            {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_e,                     quit,           {0} },
-	{ MODKEY|ShiftMask,             XK_r,                     quit,           {1} },
+	TAGKEYS(                        XK_9,                                     8)
+	{ MODKEY,                       XK_0,                      view,          {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_0,                      tag,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_q,                      quit,          {0} },
 };
 
 /* button definitions */
@@ -240,3 +215,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
