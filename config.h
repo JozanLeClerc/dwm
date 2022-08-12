@@ -3,10 +3,10 @@
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 10;        /* gaps between windows */
-static const unsigned int snap      = 24;       /* snap pixel */
+static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 32;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int user_bh            = 24;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
@@ -140,7 +140,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                spawn,          {.v = termcmd } },
-	{ MODKEY|ControlMask,           XK_Return,                spawn,          {.v = termcmd } },
+	{ MODKEY|ControlMask,           XK_Return,                spawn,          {.v = cooltermcmd } },
 	{ MODKEY,                       XK_F1,                    spawn,          {.v = filecmd } },
 	{ MODKEY,                       XK_F2,                    spawn,          {.v = editcmd } },
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browsercmd } },
