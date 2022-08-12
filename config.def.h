@@ -2,10 +2,11 @@
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 0;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 0;        /* 0 means no bar */
+static const unsigned int gappx     = 10;        /* gaps between windows */
+static const unsigned int snap      = 24;       /* snap pixel */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int user_bh            = 32;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
@@ -18,12 +19,28 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeTabActive]  = { col_gray2, col_gray3,  col_gray2 },
-	[SchemeTabInactive]  = { col_gray1, col_gray3,  col_gray1 }
+	[SchemeTabActive]  = { col_gray2, col_gray1,  col_gray2 },
+	[SchemeTabInactive]  = { col_gray2, col_gray1,  col_gray2 }
 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
+/* grid of tags */
+#define DRAWCLASSICTAGS             1 << 0
+#define DRAWTAGGRID                 1 << 1
+
+#define SWITCHTAG_UP                1 << 0
+#define SWITCHTAG_DOWN              1 << 1
+#define SWITCHTAG_LEFT              1 << 2
+#define SWITCHTAG_RIGHT             1 << 3
+#define SWITCHTAG_TOGGLETAG         1 << 4
+#define SWITCHTAG_TAG               1 << 5
+#define SWITCHTAG_VIEW              1 << 6
+#define SWITCHTAG_TOGGLEVIEW        1 << 7
+
+static const unsigned int drawtagmask = DRAWTAGGRID; /* | DRAWCLASSICTAGS to show classic row of tags */
+static const int tagrows = 3;
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -50,7 +67,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #define BARTAB_BORDERS 1       // 0 = off, 1 = on
 #define BARTAB_BOTTOMBORDER 1  // 0 = off, 1 = on
 #define BARTAB_TAGSINDICATOR 1 // 0 = off, 1 = on if >1 client/view tag, 2 = always on
-#define BARTAB_TAGSPX 5        // # pixels for tag grid boxes
+#define BARTAB_TAGSPX 6        // # pixels for tag grid boxes
 #define BARTAB_TAGSROWS 3      // # rows in tag grid (9 tags, e.g. 3x3)
 static void (*bartabmonfns[])(Monitor *) = { monocle /* , customlayoutfn */ };
 static void (*bartabfloatfns[])(Monitor *) = { NULL /* , customlayoutfn */ };
@@ -81,6 +98,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *termcmd[]       = { "alacritty", NULL };
+static const char *cooltermcmd[]   = { "cool-retro-term", NULL };
 static const char *dmenucmd[]      = { "dmenu_run", "-i", "-m", "0", NULL };
 static const char *dmpccmd[]       = { "/home/jozan/.local/bin/dmpc", NULL };
 static const char *dmkillcmd[]     = { "/home/jozan/.local/bin/dmkill", NULL };
@@ -122,6 +140,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                spawn,          {.v = termcmd } },
+	{ MODKEY|ControlMask,           XK_Return,                spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_F1,                    spawn,          {.v = filecmd } },
 	{ MODKEY,                       XK_F2,                    spawn,          {.v = editcmd } },
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browsercmd } },
@@ -170,8 +189,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,                     incnmaster,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_a,                     incnmaster,     {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_x,                     incnmaster,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_h,                     setmfact,       {.f = -0.025} },
-	{ MODKEY|ShiftMask,             XK_l,                     setmfact,       {.f = +0.025} },
+	{ MODKEY|ControlMask,           XK_minus,                 setmfact,       {.f = -0.025} },
+	{ MODKEY|ControlMask,           XK_equal,                 setmfact,       {.f = +0.025} },
 	{ MODKEY|ShiftMask,             XK_j,                     movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,                     movestack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,           {0} },
@@ -189,19 +208,27 @@ static Key keys[] = {
 	{ MODKEY,                       XK_bracketright,          focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_h,                     focusmon,       {.i = +1 } },
 	{ MODKEY,                       XK_l,                     focusmon,       {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_bracketleft,           tagmon,         {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_bracketright,          tagmon,         {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_h,                     tagmon,         {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_l,                     tagmon,         {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_bracketleft,           focusmon,       {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_bracketright,          focusmon,       {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_h,                     focusmon,       {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_l,                     focusmon,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_bracketleft,           tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_bracketright,          tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_h,                     tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_l,                     tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_bracketleft,           focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_bracketright,          focusmon,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_h,                     focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_l,                     focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_w,                     movemouse,      {0} },
-	{ MODKEY|ShiftMask,            XK_w,                     resizemouse,    {0} },
+	{ MODKEY|ShiftMask,             XK_w,                     resizemouse,    {0} },
 	{ MODKEY,                       XK_minus,                 setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,                 setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,                 setgaps,        {.i = 0  } },
+	{ MODKEY|ControlMask,           XK_k,                     switchtag,      { .ui = SWITCHTAG_UP     | SWITCHTAG_VIEW } },
+	{ MODKEY|ControlMask,           XK_j,                     switchtag,      { .ui = SWITCHTAG_DOWN   | SWITCHTAG_VIEW } },
+	{ MODKEY|ControlMask,           XK_l,                     switchtag,      { .ui = SWITCHTAG_RIGHT  | SWITCHTAG_VIEW } },
+	{ MODKEY|ControlMask,           XK_h,                     switchtag,      { .ui = SWITCHTAG_LEFT   | SWITCHTAG_VIEW } },
+	{ MODKEY|METAKEY,               XK_k,                     switchtag,      { .ui = SWITCHTAG_UP     | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
+	{ MODKEY|METAKEY,               XK_j,                     switchtag,      { .ui = SWITCHTAG_DOWN   | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
+	{ MODKEY|METAKEY,               XK_l,                     switchtag,      { .ui = SWITCHTAG_RIGHT  | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
+	{ MODKEY|METAKEY,               XK_h,                     switchtag,      { .ui = SWITCHTAG_LEFT   | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
 	TAGKEYS(                        XK_1,                                     0)
 	TAGKEYS(                        XK_2,                                     1)
 	TAGKEYS(                        XK_3,                                     2)
