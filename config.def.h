@@ -8,7 +8,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 22;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
-static const unsigned int stairpx   = 30;       /* depth of the stairs layout */
+static const unsigned int stairpx   = 25;       /* depth of the stairs layout */
 static const int stairdirection     = 0;        /* 0: left-aligned, 1: right-aligned */
 static const int stairsamesize      = 1;        /* 1 means shrink all the staired windows to the same size */
 static const char *fonts[]          = { "UbuntuMono Nerd Font:size=14" };
@@ -66,12 +66,12 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
+	{ "[S]",      stairs },
 	{ "[]=",      tile },    /* first entry is default */
 	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
-	{ "[S]",      stairs },
 	{ "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
@@ -192,12 +192,13 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,           {0} },
 	{ METAKEY,                      XK_Escape,                view,           {0} },
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
-	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* tile */
-	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* bottoastack */
-	{ MODKEY,                       XK_t,                     setlayout,      {.v = &layouts[2]} }, /* bottomstackhoriz */
-	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[3]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[4]} }, /* centeredfloatingmaster */
-	{ MODKEY|ControlMask,           XK_s,                     setlayout,      {.v = &layouts[5]} }, /* stairs */
+	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* stairs */
+	{ MODKEY,                       XK_z,                     setlayout,      {.v = &layouts[0]} }, /* stairs */
+	{ MODKEY|ShiftMask,             XK_z,                     setlayout,      {.v = &layouts[1]} }, /* tile */
+	{ MODKEY,                       XK_x,                     setlayout,      {.v = &layouts[2]} }, /* bottoastack */
+	{ MODKEY|ShiftMask,             XK_x,                     setlayout,      {.v = &layouts[3]} }, /* bottomstackhoriz */
+	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[4]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[5]} }, /* centeredfloatingmaster */
 	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[6]} }, /* monocle */
 	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[7]} }, /* floating */
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
