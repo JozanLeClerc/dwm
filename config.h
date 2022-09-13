@@ -59,7 +59,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -193,6 +193,7 @@ static Key keys[] = {
 	{ METAKEY,                      XK_Escape,                view,           {0} },
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
 	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* stairs */
+	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* tile */
 	{ MODKEY,                       XK_z,                     setlayout,      {.v = &layouts[0]} }, /* stairs */
 	{ MODKEY|ShiftMask,             XK_z,                     setlayout,      {.v = &layouts[1]} }, /* tile */
 	{ MODKEY,                       XK_x,                     setlayout,      {.v = &layouts[2]} }, /* bottoastack */
