@@ -53,14 +53,17 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class             instance    title             tags mask     switchtotag,   isfloating   isfreesize   monitor */
-	{ "st",              NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "St",              NULL,       NULL,             0,            0,             0,           0,           -1 }, /* St with Xresources patch */
-	{ "xterm-256color",  NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "mpv",             NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "Alacritty",       NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "KeePass2",        NULL,       NULL,             0,            0,             1,           0,           -1 },
-	{ NULL,              NULL,       "Event Tester",   0,            0,             0,           0,           -1 }, /* xev */
+	/* class                      instance    title             tags mask     switchtotag,   isfloating   isfreesize   monitor */
+	{ "st",                       NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "St",                       NULL,       NULL,             0,            0,             0,           0,           -1 }, /* St with Xresources patch */
+	{ "xterm-256color",           NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "mpv",                      NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "Alacritty",                NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "KeePass2",                 NULL,       NULL,             0,            0,             1,           0,           -1 },
+	{ "org.remmina.Remmina",      NULL,       NULL,             1 << 5,       0,             0,           0,           -1 },
+	{ "Vmware",                   NULL,       NULL,             1 << 6,       0,             0,           0,           -1 },
+	{ "rclone-browser",           NULL,       NULL,             1 << 7,       0,             0,           0,           -1 },
+	{ NULL,                       NULL,       "Event Tester",   0,            0,             0,           0,           -1 }, /* xev */
 };
 
 /* layout(s) */
