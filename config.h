@@ -53,17 +53,19 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class                      instance    title             tags mask     switchtotag,   isfloating   isfreesize   monitor */
-	{ "st",                       NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "St",                       NULL,       NULL,             0,            0,             0,           0,           -1 }, /* St with Xresources patch */
-	{ "xterm-256color",           NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "mpv",                      NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "Alacritty",                NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "KeePass2",                 NULL,       NULL,             0,            0,             1,           0,           -1 },
-	{ "org.remmina.Remmina",      NULL,       NULL,             1 << 5,       0,             0,           0,           -1 },
-	{ "Vmware",                   NULL,       NULL,             1 << 6,       0,             0,           0,           -1 },
-	{ "rclone-browser",           NULL,       NULL,             1 << 7,       0,             0,           0,           -1 },
-	{ NULL,                       NULL,       "Event Tester",   0,            0,             0,           0,           -1 }, /* xev */
+	/* class                         instance    title             tags mask     switchtotag,   isfloating   isfreesize   monitor */
+	{ "st",                          NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "St",                          NULL,       NULL,             0,            0,             0,           0,           -1 }, /* St with Xresources patch */
+	{ "xterm-256color",              NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "mpv",                         NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "Alacritty",                   NULL,       NULL,             0,            0,             0,           0,           -1 },
+	{ "KeePass2",                    NULL,       NULL,             0,            0,             1,           0,           -1 },
+	{ "org.remmina.Remmina",         NULL,       NULL,             1 << 5,       0,             0,           0,           -1 },
+	{ "Vmware",                      NULL,       NULL,             1 << 6,       0,             0,           0,           -1 },
+	{ "rclone-browser",              NULL,       NULL,             1 << 7,       0,             0,           0,           -1 },
+	{ "Microsoft Teams - Preview",   NULL,       NULL,             0,            0,             0,           0,            1 },
+	{ "thunderbird",                 NULL,       NULL,             0,            0,             0,           0,            1 },
+	{ NULL,                          NULL,       "Event Tester",   0,            0,             0,           0,           -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -215,18 +217,18 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
 	{ MODKEY,                       XK_space,                 togglefloating, {0} },
 	{ MODKEY,                       XK_f,                     togglefullscr,  {0} },
-	{ MODKEY,                       XK_bracketleft,           focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_bracketright,          focusmon,       {.i = +1 } },
-	{ MODKEY,                       XK_h,                     focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_l,                     focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_bracketleft,           tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_bracketright,          tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_h,                     tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_l,                     tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_bracketleft,           focusmon,       {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_bracketright,          focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_h,                     focusmon,       {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_l,                     focusmon,       {.i = +1 } },
+	{ MODKEY,                       XK_bracketleft,           focusmon,       {.i = +1 } },
+	{ MODKEY,                       XK_bracketright,          focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_h,                     focusmon,       {.i = +1 } },
+	{ MODKEY,                       XK_l,                     focusmon,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_bracketleft,           tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_bracketright,          tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_h,                     tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_l,                     tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_bracketleft,           focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_bracketright,          focusmon,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_h,                     focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_l,                     focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_w,                     movemouse,      {0} },
 	{ MODKEY|ShiftMask,             XK_w,                     resizemouse,    {0} },
 	{ MODKEY,                       XK_minus,                 setgaps,        {.i = -1 } },
