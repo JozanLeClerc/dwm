@@ -22,7 +22,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#9d0006";
+static const char col_cyan[]        = "#900000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -32,7 +32,7 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsel[][2] = {
-	{ "#ffffff", "#ff0000" },
+	{ "#ffffff", "#900000" },
 	{ "#ffffff", "#ff7f00" },
 	{ "#000000", "#ffff00" },
 	{ "#000000", "#00ff00" },
@@ -114,7 +114,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *term_cmd[]        = { "alacritty", NULL };
-static const char *coolterm_cmd[]    = { "cool-retro-term", NULL };
+static const char *hardflip_cmd[]    = { "alacritty", "-e", "hf", NULL };
 static const char *dmenu_cmd[]       = { "dmenu_run", "-i", "-m", "0", NULL };
 static const char *dmapps_cmd[]      = { "/home/jozan/.local/bin/dmapps", NULL };
 static const char *dmpc_cmd[]        = { "/home/jozan/.local/bin/dmpc", NULL };
@@ -158,7 +158,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenu_cmd } },
 	{ MODKEY,                       XK_Return,                spawn,          {.v = term_cmd } },
-	{ MODKEY|ControlMask|ShiftMask, XK_Return,                spawn,          {.v = coolterm_cmd } },
+	{ MODKEY|ControlMask|ShiftMask, XK_Return,                spawn,          {.v = hardflip_cmd } },
 	{ MODKEY|ControlMask,           XK_Return,                spawn,          {.v = dmapps_cmd } },
 	{ MODKEY,                       XK_F1,                    spawn,          {.v = file_cmd } },
 	{ MODKEY|ShiftMask,             XK_F1,                    spawn,          {.v = file_alt_cmd } },
