@@ -29,6 +29,20 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"alacritty", "--class", "spterm", NULL };
+const char *spcmd2[] = {"alacritty", "--class", "spfm", "-e", "zsh", "-ic", "lf", NULL };
+const char *spcmd3[] = {"pcmanfm", NULL };
+static Sp scratchpads[] = {
+	/* name     cmd  */
+	{"spterm",  spcmd1},
+	{"spfm",    spcmd2},
+	{"spfmgui", spcmd3},
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -64,6 +78,9 @@ static const Rule rules[] = {
 	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
 	{ "teams-for-linux",     NULL,       NULL,  0,         1,           0,         0,          1 },
 	{ "thunderbird",         NULL,       NULL,  1 << 1,    0,           0,         0,          1 },
+	{ NULL,                  "spterm",   NULL,  SPTAG(0),  1,           0,         0,         -1 },
+	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           0,         0,         -1 },
+	{ "pcmanfm",             NULL,       NULL,  SPTAG(2),  1,           0,         0,         -1 },
 };
 
 /* layout(s) */
@@ -116,9 +133,9 @@ static const char *dmpass_full_cmd[] = { "/home/r_bousset/.local/bin/dmpass", "-
 static const char *dmpass_cmd[]      = { "/home/r_bousset/.local/bin/dmpass", NULL };
 static const char *dmotp_cmd[]       = { "/home/r_bousset/.local/bin/dmotp", NULL };
 static const char *ndate_cmd[]       = { "/home/r_bousset/.local/bin/ndate", NULL };
-static const char *file_cmd[]        = { "alacritty", "-e", "zsh", "-ic", "lf", NULL };
-static const char *file_alt_cmd[]    = { "pcmanfm", NULL };
-static const char *edit_cmd[]        = { "emacsclient", "-c", NULL };
+// static const char *file_cmd[]        = { "alacritty", "-e", "zsh", "-ic", "lf", NULL };
+// static const char *file_alt_cmd[]    = { "pcmanfm", NULL };
+// static const char *edit_cmd[]        = { "emacsclient", "-c", NULL };
 static const char *browser_cmd[]     = { "firefox", NULL };
 static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
 static const char *w3m_cmd[]         = { "alacritty", "-e", "w3m", "https://start.duckduckgo.com/", NULL };
@@ -148,9 +165,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return,                spawn,          {.v = term_cmd } },
 	{ MODKEY|ControlMask|ShiftMask, XK_Return,                spawn,          {.v = hardflip_cmd } },
 	{ MODKEY|ControlMask,           XK_Return,                spawn,          {.v = dmapps_cmd } },
-	{ MODKEY,                       XK_F1,                    spawn,          {.v = file_cmd } },
-	{ MODKEY|ShiftMask,             XK_F1,                    spawn,          {.v = file_alt_cmd } },
-	{ MODKEY,                       XK_F2,                    spawn,          {.v = edit_cmd } },
+	{ MODKEY,                       XK_F1,                    togglescratch,  {.ui = 0 } },
+	{ MODKEY,                       XK_F2,                    togglescratch,  {.ui = 1 } },
+	{ MODKEY|ShiftMask,             XK_F2,                    togglescratch,  {.ui = 2 } },
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browser_cmd } },
 	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = torbro_cmd } },
 	{ MODKEY,                       XK_F4,                    spawn,          {.v = w3m_cmd } },
@@ -274,4 +291,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
