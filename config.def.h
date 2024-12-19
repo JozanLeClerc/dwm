@@ -2,27 +2,27 @@
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 10;        /* gaps between windows */
+static const unsigned int brdsh_w  = 3;        /* width of the app bar dash */
+static const unsigned int brdsh_ypos  = 20;        /* y-position of the dash */
+static const unsigned int text_ypos  = 1;        /* y-position of text */
+static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
-static const int showbar            = 1;        /* 0 means no bar */
+static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 22;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
-static const unsigned int stairpx   = 25;       /* depth of the stairs layout */
-static const int stairdirection     = 0;        /* 0: left-aligned, 1: right-aligned */
-static const int stairsamesize      = 1;        /* 1 means shrink all the staired windows to the same size */
 static const char *fonts[]          = { "UbuntuMono Nerd Font:size=14" };
 static const char dmenufont[]       = "monospace:size=11";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#6e0000";
+static const char col_cyan[]        = "#900000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -53,14 +53,17 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class             instance    title             tags mask     switchtotag,   isfloating   isfreesize   monitor */
-	{ "st",              NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "St",              NULL,       NULL,             0,            0,             0,           0,           -1 }, /* St with Xresources patch */
-	{ "xterm-256color",  NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "mpv",             NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "Alacritty",       NULL,       NULL,             0,            0,             0,           0,           -1 },
-	{ "KeePass2",        NULL,       NULL,             0,            0,             1,           0,           -1 },
-	{ NULL,              NULL,       "Event Tester",   0,            0,             0,           0,           -1 }, /* xev */
+	/* class                 instance    title  tags mask  isfloating   isterminal noswallow   monitor */
+	{ "st",                  NULL,       NULL,  0,         0,           1,         0,         -1 },
+	{ "St",                  NULL,       NULL,  0,         0,           1,         0,         -1 }, /* St with Xresources patch */
+	{ "xterm-256color",      NULL,       NULL,  0,         0,           1,         0,         -1 },
+	{ "mpv",                 NULL,       NULL,  0,         0,           0,         0,         -1 },
+	{ "Alacritty",           NULL,       NULL,  0,         0,           1,         0,         -1 },
+	{ "rclone-browser",      NULL,       NULL,  1 << 1,    0,           0,         0,          2 },
+	{ "org.remmina.Remmina", NULL,       NULL,  1 << 2,    0,           0,         0,          2 },
+	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
+	{ "teams-for-linux",     NULL,       NULL,  0,         1,           0,         0,          1 },
+	{ "thunderbird",         NULL,       NULL,  1 << 1,    0,           0,         0,          1 },
 };
 
 /* layout(s) */
@@ -68,15 +71,18 @@ static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] *
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static const float fgw = .75, fgh = .75;
+
+#define FORCE_VSPLIT 1
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[S]",      stairs },
 	{ "[]=",      tile },    /* first entry is default */
 	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
+	{ "###",      nrowgrid },
 	{ "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
@@ -86,38 +92,39 @@ static const Layout layouts[] = {
 #define METAKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|METAKEY|ControlMask,   KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      tagprevmon,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      tagnextmon,     {.ui = 1 << TAG} }, \
 	{ MODKEY|METAKEY,               KEY,      toggletag,      {.ui = 1 << TAG} }, \
-	{ MODKEY|METAKEY|ControlMask,   KEY,      toggleview,     {.ui = 1 << TAG} },
+	{ MODKEY|ControlMask,           KEY,      tagprevmon,     {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask|ShiftMask, KEY,      tagnextmon,     {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *term_cmd[]        = { "st", NULL };
-static const char *coolterm_cmd[]    = { "cool-retro-term", NULL };
-static const char *dmenu_cmd[]       = { "dmenu_run", "-i", "-m", "0", NULL };
-static const char *dmpc_cmd[]        = { "/home/jozan/.local/bin/dmpc", NULL };
-static const char *dmkill_cmd[]      = { "/home/jozan/.local/bin/dmkill", NULL };
-static const char *dmsearch_cmd[]    = { "/home/jozan/.local/bin/dmsearch", NULL };
-static const char *dmscrot_cmd[]     = { "/home/jozan/.local/bin/dmscrot", NULL };
-static const char *dmlog_cmd[]       = { "/home/jozan/.local/bin/dmlog", NULL };
-static const char *dmpass_full_cmd[] = { "/home/jozan/.local/bin/dmpass", "--full", NULL };
-static const char *dmpass_cmd[]      = { "/home/jozan/.local/bin/dmpass", NULL };
-static const char *dmotp_cmd[]       = { "/home/jozan/.local/bin/dmotp", NULL };
-static const char *ndate_cmd[]       = { "/home/jozan/.local/bin/ndate", NULL };
+static const char *term_cmd[]        = { "alacritty", NULL };
+static const char *hardflip_cmd[]    = { "alacritty", "-e", "hf", NULL };
+static const char *dmenucmd[]       = { "dmenu_run", "-i", "-m", "0", NULL };
+static const char *dmapps_cmd[]      = { "/home/r_bousset/.local/bin/dmapps", NULL };
+static const char *dmpc_cmd[]        = { "/home/r_bousset/.local/bin/dmpc", NULL };
+static const char *dmkill_cmd[]      = { "/home/r_bousset/.local/bin/dmkill", NULL };
+static const char *dmsearch_cmd[]    = { "/home/r_bousset/.local/bin/dmsearch", NULL };
+static const char *dmscrot_cmd[]     = { "/home/r_bousset/.local/bin/dmscrot", NULL };
+static const char *dmlog_cmd[]       = { "/home/r_bousset/.local/bin/dmlog", NULL };
+static const char *dmpass_full_cmd[] = { "/home/r_bousset/.local/bin/dmpass", "--full", NULL };
+static const char *dmpass_cmd[]      = { "/home/r_bousset/.local/bin/dmpass", NULL };
+static const char *dmotp_cmd[]       = { "/home/r_bousset/.local/bin/dmotp", NULL };
+static const char *ndate_cmd[]       = { "/home/r_bousset/.local/bin/ndate", NULL };
 static const char *file_cmd[]        = { "alacritty", "-e", "zsh", "-ic", "lf", NULL };
 static const char *file_alt_cmd[]    = { "pcmanfm", NULL };
 static const char *edit_cmd[]        = { "emacsclient", "-c", NULL };
-static const char *browser_cmd[]     = { "iridium", "--force-dark-mode", NULL };
-static const char *torbro_cmd[]      = { "torify", "iridium", "--force-dark-mode", NULL };
+static const char *browser_cmd[]     = { "firefox", NULL };
+static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
 static const char *w3m_cmd[]         = { "alacritty", "-e", "w3m", "https://start.duckduckgo.com/", NULL };
 static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
 static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
-static const char *cal_cmd[]         = { "alacritty", "-e", "calcurse", "-C", "/home/jozan/.config/calcurse", "-D", "/home/jozan/.local/share/calcurse", NULL };
+static const char *cal_cmd[]         = { "alacritty", "-e", "calcurse", "-C", "/home/r_bousset/.config/calcurse", "-D", "/home/r_bousset/.local/share/calcurse", NULL };
 static const char *scli_cmd[]        = { "alacritty", "-e", "scli", NULL };
 static const char *mutt_cmd[]        = { "alacritty", "-e", "neomutt", NULL };
 static const char *gotop_cmd[]       = { "alacritty", "-e", "gotop", NULL };
@@ -125,23 +132,22 @@ static const char *htop_cmd[]        = { "alacritty", "-e", "htop", NULL };
 static const char *top_cmd[]         = { "alacritty", "-e", "top", NULL };
 static const char *bl_inc_cmd[]      = { "xbacklight", "-inc", "10", NULL };
 static const char *bl_dec_cmd[]      = { "xbacklight", "-dec", "10", NULL };
-static const char *vol_tog_cmd[]     = { "/home/jozan/.local/bin/mixer-set", "toggle", NULL };
-static const char *vol_dec_cmd[]     = { "/home/jozan/.local/bin/mixer-set", "lower", NULL };
-static const char *vol_inc_cmd[]     = { "/home/jozan/.local/bin/mixer-set", "raise", NULL };
-static const char *mic_cmd[]         = { "/home/jozan/.local/bin/mic", NULL };
+static const char *vol_tog_cmd[]     = { "/home/r_bousset/.local/bin/mixer-set", "toggle", NULL };
+static const char *vol_dec_cmd[]     = { "/home/r_bousset/.local/bin/mixer-set", "lower", NULL };
+static const char *vol_inc_cmd[]     = { "/home/r_bousset/.local/bin/mixer-set", "raise", NULL };
+static const char *mic_cmd[]         = { "/home/r_bousset/.local/bin/mic", NULL };
 static const char *mpc_prev_cmd[]    = { "mpc", "prev", NULL };
 static const char *mpc_next_cmd[]    = { "mpc", "next", NULL };
 static const char *mpc_tog_cmd[]     = { "mpc", "toggle", NULL };
 static const char *mpc_stop_cmd[]    = { "mpc", "stop", NULL };
-static const char *killespeak_cmd[]  = { "/home/jozan/.local/bin/shutup", NULL };
+static const char *killespeak_cmd[]  = { "/home/r_bousset/.local/bin/shutup", NULL };
 
-#include "movestack.c"
 #include <X11/XF86keysym.h>
-static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenu_cmd } },
+static const Key keys[] = {
+	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                spawn,          {.v = term_cmd } },
-	{ MODKEY|ControlMask,           XK_Return,                spawn,          {.v = coolterm_cmd } },
+	{ MODKEY|ControlMask|ShiftMask, XK_Return,                spawn,          {.v = hardflip_cmd } },
+	{ MODKEY|ControlMask,           XK_Return,                spawn,          {.v = dmapps_cmd } },
 	{ MODKEY,                       XK_F1,                    spawn,          {.v = file_cmd } },
 	{ MODKEY|ShiftMask,             XK_F1,                    spawn,          {.v = file_alt_cmd } },
 	{ MODKEY,                       XK_F2,                    spawn,          {.v = edit_cmd } },
@@ -197,18 +203,20 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,           {0} },
 	{ METAKEY,                      XK_Escape,                view,           {0} },
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
-	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* stairs */
-	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* tile */
-	{ MODKEY,                       XK_z,                     setlayout,      {.v = &layouts[0]} }, /* stairs */
-	{ MODKEY|ShiftMask,             XK_z,                     setlayout,      {.v = &layouts[1]} }, /* tile */
-	{ MODKEY,                       XK_x,                     setlayout,      {.v = &layouts[2]} }, /* bottoastack */
-	{ MODKEY|ShiftMask,             XK_x,                     setlayout,      {.v = &layouts[3]} }, /* bottomstackhoriz */
-	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[4]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[5]} }, /* centeredfloatingmaster */
+	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* tile */
+	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[0]} }, /* tile */
+	{ MODKEY,                       XK_z,                     setlayout,      {.v = &layouts[0]} }, /* tile */
+	{ MODKEY|ShiftMask,             XK_z,                     setlayout,      {.v = &layouts[0]} }, /* tile */
+	{ MODKEY,                       XK_x,                     setlayout,      {.v = &layouts[1]} }, /* bottoastack */
+	{ MODKEY|ShiftMask,             XK_x,                     setlayout,      {.v = &layouts[2]} }, /* bottomstackhoriz */
+	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[3]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[4]} }, /* centeredfloatingmaster */
+	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[5]} }, /* centeredmaster */
 	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[6]} }, /* monocle */
 	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[7]} }, /* floating */
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
 	{ MODKEY,                       XK_space,                 togglefloating, {0} },
+	{ MODKEY|ControlMask,           XK_space,                 toggleforegrounded, {0} },
 	{ MODKEY,                       XK_f,                     togglefullscr,  {0} },
 	{ MODKEY,                       XK_bracketleft,           focusmon,       {.i = +1 } },
 	{ MODKEY,                       XK_bracketright,          focusmon,       {.i = -1 } },
@@ -247,14 +255,15 @@ static Key keys[] = {
 	{ MODKEY,                       XK_0,                      view,          {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,                      tag,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_e,                      quit,          {0} },
+	{ MODKEY,                       XK_o,                      winview,       {0} },
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
+	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = term_cmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },

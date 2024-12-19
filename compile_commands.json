@@ -1,0 +1,27 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-std=c99",
+      "-pedantic",
+      "-Wall",
+      "-Wno-deprecated-declarations",
+      "-march=alderlake",
+      "-Os",
+      "-pipe",
+      "-I/usr/X11R6/include",
+      "-I/usr/include/freetype2",
+      "-D_DEFAULT_SOURCE",
+      "-D_BSD_SOURCE",
+      "-D_XOPEN_SOURCE=700L",
+      "-DVERSION=\"6.5\"",
+      "-DXINERAMA",
+      "-DHOME=\"/home/r_bousset/\"",
+      "-DHOMEBIN=\"/home/r_bousset/.local/bin/\"",
+      "dwm.c"
+    ],
+    "directory": "/home/r_bousset/.local/packs/dwm",
+    "file": "/home/r_bousset/.local/packs/dwm/dwm.c"
+  }
+]
