@@ -36,11 +36,13 @@ typedef struct {
 const char *spcmd1[] = {"alacritty", "--class", "spterm", NULL };
 const char *spcmd2[] = {"alacritty", "--class", "spfm", "-e", "zsh", "-ic", "lf", NULL };
 const char *spcmd3[] = {"pcmanfm", NULL };
+const char *spcmd4[] = {"alacritty", "--class", "spflip", "-e", "zsh", "-ic", "hf", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
 	{"spterm",  spcmd1},
 	{"spfm",    spcmd2},
 	{"spfmgui", spcmd3},
+	{"spflip",  spcmd4},
 };
 
 /* tagging */
@@ -79,8 +81,9 @@ static const Rule rules[] = {
 	{ "teams-for-linux",     NULL,       NULL,  0,         1,           0,         0,          1 },
 	{ "thunderbird",         NULL,       NULL,  1 << 1,    0,           0,         0,          1 },
 	{ NULL,                  "spterm",   NULL,  SPTAG(0),  1,           0,         0,         -1 },
-	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           0,         0,         -1 },
-	{ "pcmanfm",             NULL,       NULL,  SPTAG(2),  1,           0,         0,         -1 },
+	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
+	{ NULL,                  "pcmanfm",  NULL,  SPTAG(2),  1,           0,         0,         -1 },
+	{ NULL,                  "spflip",   NULL,  SPTAG(3),  1,           1,         0,         -1 },
 };
 
 /* layout(s) */
@@ -122,7 +125,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *term_cmd[]        = { "alacritty", NULL };
 static const char *hardflip_cmd[]    = { "alacritty", "-e", "hf", NULL };
-static const char *dmenucmd[]       = { "dmenu_run", "-i", "-m", "0", NULL };
+static const char *dmenucmd[]        = { "dmenu_run", "-i", "-m", "0", NULL };
 static const char *dmapps_cmd[]      = { "/home/r_bousset/.local/bin/dmapps", NULL };
 static const char *dmpc_cmd[]        = { "/home/r_bousset/.local/bin/dmpc", NULL };
 static const char *dmkill_cmd[]      = { "/home/r_bousset/.local/bin/dmkill", NULL };
@@ -138,7 +141,6 @@ static const char *ndate_cmd[]       = { "/home/r_bousset/.local/bin/ndate", NUL
 // static const char *edit_cmd[]        = { "emacsclient", "-c", NULL };
 static const char *browser_cmd[]     = { "firefox", NULL };
 static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
-static const char *w3m_cmd[]         = { "alacritty", "-e", "w3m", "https://start.duckduckgo.com/", NULL };
 static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
 static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
 static const char *cal_cmd[]         = { "alacritty", "-e", "calcurse", "-C", "/home/r_bousset/.config/calcurse", "-D", "/home/r_bousset/.local/share/calcurse", NULL };
@@ -170,7 +172,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_F2,                    togglescratch,  {.ui = 2 } },
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browser_cmd } },
 	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = torbro_cmd } },
-	{ MODKEY,                       XK_F4,                    spawn,          {.v = w3m_cmd } },
+	{ MODKEY,                       XK_F4,                    togglescratch,  {.ui = 3 } },
 	{ MODKEY,                       XK_F5,                    spawn,          {.v = ncmpc_cmd } },
 	{ MODKEY,                       XK_F6,                    spawn,          {.v = nb_cmd} },
 	{ MODKEY,                       XK_F7,                    spawn,          {.v = cal_cmd } },

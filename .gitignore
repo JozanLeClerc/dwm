@@ -128,3 +128,5 @@ flycheck_*.el
 .ccls*
 dwm
 compile_flags.txt
+compile_commands.json
+.cache/
