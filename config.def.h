@@ -3,7 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int brdsh_w  = 3;        /* width of the app bar dash */
-static const unsigned int brdsh_ypos  = 20;        /* y-position of the dash */
+static const unsigned int brdsh_ypos  = 0;        /* y-position of the dash */
 static const unsigned int text_ypos  = 1;        /* y-position of text */
 static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -34,15 +34,17 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"alacritty", "--class", "spterm", NULL };
-const char *spcmd2[] = {"alacritty", "--class", "spfm", "-e", "zsh", "-ic", "lf", NULL };
+const char *spcmd2[] = {"alacritty", "--class", "spfm", "-e", "lf", NULL };
 const char *spcmd3[] = {"pcmanfm", NULL };
-const char *spcmd4[] = {"alacritty", "--class", "spflip", "-e", "zsh", "-ic", "hf", NULL };
+const char *spcmd4[] = {"alacritty", "--class", "spflip", "-e", "hf", NULL };
+const char *spcmd5[] = {"alacritty", "--class", "spncmpc", "-e", "ncmpc", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
 	{"spterm",  spcmd1},
 	{"spfm",    spcmd2},
 	{"spfmgui", spcmd3},
 	{"spflip",  spcmd4},
+	{"spncmpc",  spcmd4},
 };
 
 /* tagging */
@@ -142,7 +144,7 @@ static const char *ndate_cmd[]       = { "/home/r_bousset/.local/bin/ndate", NUL
 static const char *browser_cmd[]     = { "firefox", NULL };
 static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
 static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
-static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
+// static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
 static const char *cal_cmd[]         = { "alacritty", "-e", "calcurse", "-C", "/home/r_bousset/.config/calcurse", "-D", "/home/r_bousset/.local/share/calcurse", NULL };
 static const char *scli_cmd[]        = { "alacritty", "-e", "scli", NULL };
 static const char *mutt_cmd[]        = { "alacritty", "-e", "neomutt", NULL };
@@ -173,7 +175,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browser_cmd } },
 	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = torbro_cmd } },
 	{ MODKEY,                       XK_F4,                    togglescratch,  {.ui = 3 } },
-	{ MODKEY,                       XK_F5,                    spawn,          {.v = ncmpc_cmd } },
+	{ MODKEY,                       XK_F5,                    togglescratch,  {.ui = 4 } },
 	{ MODKEY,                       XK_F6,                    spawn,          {.v = nb_cmd} },
 	{ MODKEY,                       XK_F7,                    spawn,          {.v = cal_cmd } },
 	{ MODKEY,                       XK_F8,                    spawn,          {.v = scli_cmd } },
