@@ -86,6 +86,7 @@ static const Rule rules[] = {
 	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
 	{ NULL,                  "pcmanfm",  NULL,  SPTAG(2),  1,           0,         0,         -1 },
 	{ NULL,                  "spflip",   NULL,  SPTAG(3),  1,           1,         0,         -1 },
+	{ NULL,                  "spncmpc",  NULL,  SPTAG(4),  1,           1,         0,         -1 },
 };
 
 /* layout(s) */
