@@ -34,17 +34,17 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"alacritty", "--class", "spterm", NULL };
-const char *spcmd2[] = {"alacritty", "--class", "spfm", "-e", "lf", NULL };
+const char *spcmd2[] = {"alacritty", "--class", "spfm", "-e", "zsh", "-ic", "lf", NULL };
 const char *spcmd3[] = {"pcmanfm", NULL };
 const char *spcmd4[] = {"alacritty", "--class", "spflip", "-e", "hf", NULL };
-const char *spcmd5[] = {"alacritty", "--class", "spncmpc", "-e", "ncmpc", NULL };
+const char *spcmd5[] = {"alacritty", "--class", "spmpd", "-e", "ncmpc", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
 	{"spterm",  spcmd1},
 	{"spfm",    spcmd2},
 	{"spfmgui", spcmd3},
 	{"spflip",  spcmd4},
-	{"spncmpc",  spcmd4},
+	{"spmpd",  spcmd5},
 };
 
 /* tagging */
@@ -86,7 +86,7 @@ static const Rule rules[] = {
 	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
 	{ NULL,                  "pcmanfm",  NULL,  SPTAG(2),  1,           0,         0,         -1 },
 	{ NULL,                  "spflip",   NULL,  SPTAG(3),  1,           1,         0,         -1 },
-	{ NULL,                  "spncmpc",  NULL,  SPTAG(4),  1,           1,         0,         -1 },
+	{ NULL,                  "spmpd",    NULL,  SPTAG(4),  1,           1,         0,         -1 },
 };
 
 /* layout(s) */
