@@ -28,7 +28,12 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lX11-xcb -lxcb -lxcb-r
 # flags
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS} -DHOME=\"${HOME}/\" -DHOMEBIN=\"${HOME}/.local/bin/\"
 #CFLAGS   = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
+HOSTNAME = $(shell /usr/bin/hostame -s)
+
 CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -march=alderlake -Os -pipe ${INCS} ${CPPFLAGS}
+ifeq $(${HOSTNAME}, mother)
+CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -march=haswell -Os -pipe ${INCS} ${CPPFLAGS}
+endif
 LDFLAGS  = ${LIBS}
 
 # Solaris
