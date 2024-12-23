@@ -38,13 +38,15 @@ const char *spcmd2[] = {"alacritty", "--class", "spfm", "-e", "zsh", "-ic", "lf"
 const char *spcmd3[] = {"pcmanfm", NULL };
 const char *spcmd4[] = {"alacritty", "--class", "spflip", "-e", "hf", NULL };
 const char *spcmd5[] = {"alacritty", "--class", "spmpd", "-e", "ncmpc", NULL };
+const char *spcmd6[] = {"alacritty", "--class", "spnews", "-e", "nb", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
 	{"spterm",  spcmd1},
 	{"spfm",    spcmd2},
 	{"spfmgui", spcmd3},
 	{"spflip",  spcmd4},
-	{"spmpd",  spcmd5},
+	{"spmpd",   spcmd5},
+	{"spnews",  spcmd6},
 };
 
 /* tagging */
@@ -87,6 +89,7 @@ static const Rule rules[] = {
 	{ NULL,                  "pcmanfm",  NULL,  SPTAG(2),  1,           0,         0,         -1 },
 	{ NULL,                  "spflip",   NULL,  SPTAG(3),  1,           1,         0,         -1 },
 	{ NULL,                  "spmpd",    NULL,  SPTAG(4),  1,           1,         0,         -1 },
+	{ NULL,                  "spnews",   NULL,  SPTAG(5),  0,           1,         0,         -1 },
 };
 
 /* layout(s) */
@@ -144,7 +147,7 @@ static const char *ndate_cmd[]       = { "/home/r_bousset/.local/bin/ndate", NUL
 // static const char *edit_cmd[]        = { "emacsclient", "-c", NULL };
 static const char *browser_cmd[]     = { "firefox", NULL };
 static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
-static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
+// static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
 // static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
 static const char *cal_cmd[]         = { "alacritty", "-e", "calcurse", "-C", "/home/r_bousset/.config/calcurse", "-D", "/home/r_bousset/.local/share/calcurse", NULL };
 static const char *scli_cmd[]        = { "alacritty", "-e", "scli", NULL };
@@ -177,7 +180,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = torbro_cmd } },
 	{ MODKEY,                       XK_F4,                    togglescratch,  {.ui = 3 } },
 	{ MODKEY,                       XK_F5,                    togglescratch,  {.ui = 4 } },
-	{ MODKEY,                       XK_F6,                    spawn,          {.v = nb_cmd} },
+	{ MODKEY,                       XK_F6,                    togglescratch,  {.ui = 5 } },
 	{ MODKEY,                       XK_F7,                    spawn,          {.v = cal_cmd } },
 	{ MODKEY,                       XK_F8,                    spawn,          {.v = scli_cmd } },
 	{ MODKEY,                       XK_F9,                    spawn,          {.v = mutt_cmd } },
