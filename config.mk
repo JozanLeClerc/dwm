@@ -31,7 +31,7 @@ CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VE
 HOSTNAME = $(shell /usr/bin/hostame -s)
 
 CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -march=alderlake -Os -pipe ${INCS} ${CPPFLAGS}
-ifeq $(${HOSTNAME}, mother)
+ifeq (${HOSTNAME}, mother)
 CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -march=haswell -Os -pipe ${INCS} ${CPPFLAGS}
 endif
 LDFLAGS  = ${LIBS}
