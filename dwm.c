@@ -1951,7 +1951,7 @@ nrowgrid(Monitor *m)
 		cw = (m->ww - uw) / (cols - ci);
 		uw += cw;
 
-		resize(c, cx, cy, cw - 2 * c->bw, ch - 2 * c->bw, 0);
+		resize(c, cx + m->gappx, cy + m->gappx, cw - 2 * c->bw - 2 * m->gappx, ch - 2 * c->bw - 2 * m->gappx, 0);
 	}
 }
 
