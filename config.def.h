@@ -10,7 +10,7 @@ static const unsigned int systrayonleft = 0;    /* 0: systray in the right corne
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 25;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
@@ -278,6 +278,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_0,                      view,          {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,                      tag,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_e,                      quit,          {0} },
+	{ MODKEY|ShiftMask,             XK_r,                      quit,          {1} },
 	{ MODKEY,                       XK_o,                      winview,       {0} },
 };
 
