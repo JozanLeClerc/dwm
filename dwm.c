@@ -3486,6 +3486,8 @@ winview(const Arg* arg){
 	if (!(c = wintoclient(win)))
 		return;
 
+	if ((c->tags & SPTAGMASK))
+		return;
 	a.ui = c->tags;
 	view(&a);
 }
