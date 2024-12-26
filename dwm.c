@@ -339,6 +339,7 @@ static int restart = 0;
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
+static Clr **tagscheme;
 static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
@@ -851,6 +852,9 @@ cleanup(void)
 	for (i = 0; i < LENGTH(colors) + 1; i++)
 		free(scheme[i]);
 	free(scheme);
+	for (i = 0; i < LENGTH(tags); i++)
+		free(tagscheme[i]);
+	free(tagscheme);
 	XDestroyWindow(dpy, wmcheckwin);
 	drw_free(drw);
 	XSync(dpy, False);
@@ -1159,7 +1163,7 @@ drawbar(Monitor *m)
 	if (drawtagmask & DRAWCLASSICTAGS)
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
-		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+		drw_setscheme(drw, (m->tagset[m->seltags] & 1 << i ? tagscheme[i] : scheme[SchemeNorm]));
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
 			drw_rect(drw, x + boxs, boxs, boxw, boxw,
@@ -1322,13 +1326,13 @@ drawtaggrid(Monitor *m, int *x_pos, unsigned int occ)
 			invert = m->tagset[m->seltags] & 1 << i ? 0 : 1;
 
 			/* Select active color for current square */
-			XSetForeground(drw->dpy, drw->gc, !invert ? scheme[SchemeSel][ColBg].pixel :
+			XSetForeground(drw->dpy, drw->gc, !invert ? tagscheme[i][1].pixel :
 				  scheme[SchemeNorm][ColFg].pixel);
 			XFillRectangle(dpy, drw->drawable, drw->gc, x+1, y+1, h-1, h-1);
 
 			/* Mark square if tag has client */
 			if (occ & 1 << i) {
-				XSetForeground(drw->dpy, drw->gc, !invert ? scheme[SchemeSel][ColFg].pixel :
+				XSetForeground(drw->dpy, drw->gc, !invert ? tagscheme[i][0].pixel :
 				   scheme[SchemeNorm][ColBg].pixel);
 				XFillRectangle(dpy, drw->drawable, drw->gc, x + 1, y + 1,
 				   h / 2, h / 2);
@@ -1369,6 +1373,9 @@ findbefore(Client *c)
 void
 focus(Client *c)
 {
+	unsigned int focused_tag;
+	int i;
+
 	if (!c || !ISVISIBLE(c))
 		for (c = selmon->stack; c && !ISVISIBLE(c); c = c->snext);
 	if (selmon->sel && selmon->sel != c)
@@ -1381,7 +1388,14 @@ focus(Client *c)
 		detachstack(c);
 		attachstack(c);
 		grabbuttons(c, 1);
-		XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
+		focused_tag = selmon->tagset[selmon->seltags];
+		for (i = 0; i < LENGTH(tags); i++) {
+			if (focused_tag & (1 << (i - 1))) {
+				break;
+			}
+		}
+		// XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
+		XSetWindowBorder(dpy, c->win, tagscheme[i - 1][1].pixel);
 		setfocus(c);
 	} else {
 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
@@ -2407,10 +2421,15 @@ setup(void)
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
 	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
 	/* init appearance */
+	if (LENGTH(tags) > LENGTH(tagsel))
+		die("too few color schemes for the tags");
 	scheme = ecalloc(LENGTH(colors) + 1, sizeof(Clr *));
 	scheme[LENGTH(colors)] = drw_scm_create(drw, colors[0], 3);
 	for (i = 0; i < LENGTH(colors); i++)
 		scheme[i] = drw_scm_create(drw, colors[i], 3);
+	tagscheme = ecalloc(LENGTH(tagsel), sizeof(Clr *));
+	for (i = 0; i < LENGTH(tagsel); i++)
+		tagscheme[i] = drw_scm_create(drw, tagsel[i], 2);
 	/* init system tray */
 	updatesystray();
 	/* init bars */

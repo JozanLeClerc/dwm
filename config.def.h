@@ -52,6 +52,19 @@ static Sp scratchpads[] = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+static const char *tagsel[][2] = {
+	/* fg        bg */
+	{ "#ebdbb2", "#cc241d" },
+	{ "#ebdbb2", "#98971a" },
+	{ "#ebdbb2", "#d79921" },
+	{ "#ebdbb2", "#458588" },
+	{ "#ebdbb2", "#b16286" },
+	{ "#ebdbb2", "#fb4934" },
+	{ "#ebdbb2", "#b8bb26" },
+	{ "#ebdbb2", "#fabd2f" },
+	{ "#ebdbb2", "#83a598" },
+};
+
 /* grid of tags */
 #define DRAWCLASSICTAGS             1 << 0
 #define DRAWTAGGRID                 1 << 1
