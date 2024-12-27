@@ -206,6 +206,7 @@ static void destroynotify(XEvent *e);
 static void detach(Client *c);
 static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
+static void dmenuspawn(const Arg *arg);
 static void drawbar(Monitor *m);
 static void drawbars(void);
 static int drawstatusbar(Monitor *m, int bh, char* text);
@@ -2659,6 +2660,64 @@ sigterm(int unused)
 {
 	Arg a = {.i = 0};
 	quit(&a);
+}
+
+void
+dmenuspawn(const Arg *arg)
+{
+	unsigned int focused_tag;
+	int i, j;
+	struct sigaction sa;
+	char **cmd;
+
+	cmd = malloc(8 * sizeof(char*));
+    if (!cmd)
+		return;
+
+    for (i = 0; i < 8 && ((char**)arg->v)[i] != NULL; i++) {
+        cmd[i] = strdup(((char**)arg->v)[i]);
+        if (!cmd[i]) {
+            for (j = 0; j < i; j++) {
+                free(cmd[j]);
+            }
+            free(cmd);
+			return;
+        }
+    }
+	focused_tag = selmon->tagset[selmon->seltags];
+	for (j = 0; j < LENGTH(tags); j++) {
+		if (focused_tag & (1 << (j - 1))) {
+			break;
+		}
+	}
+	cmd[i] = strdup(tagsel[j - 1][1]);
+	if (!cmd[i]) {
+		for (j = 0; j < i; j++) {
+			free(cmd[j]);
+		}
+		free(cmd);
+		return;
+	}
+	cmd[i + 1] = NULL;
+	if (arg->v == dmenucmd)
+		dmenumon[0] = '0' + selmon->num;
+	if (fork() == 0) {
+		if (dpy)
+			close(ConnectionNumber(dpy));
+		setsid();
+
+		sigemptyset(&sa.sa_mask);
+		sa.sa_flags = 0;
+		sa.sa_handler = SIG_DFL;
+		sigaction(SIGCHLD, &sa, NULL);
+
+		execvp(((char **)cmd)[0], (char **)cmd);
+		die("dwm: execvp '%s' failed:", ((char **)cmd)[0]);
+	}
+	for (i = 0; cmd[i] != NULL; i++) {
+		free(cmd[i]);
+	}
+	free(cmd);
 }
 
 void
