@@ -10,9 +10,9 @@ static const unsigned int systrayonleft = 0;    /* 0: systray in the right corne
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
-static const int showbar            = 1;        /* 0 means no bar */
+static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 25;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int user_bh            = 24;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
 static const char *fonts[]          = { "BigBlueTermPlus Nerd Font:size=12" };
 // static const char *fonts[]          = { "Terminess Nerd Font:style=Bold:size=13" };
@@ -147,6 +147,7 @@ static const char *hardflip_cmd[]    = { "alacritty", "-e", "hf", NULL };
 static const char *dmenucmd[]        = { "dmenu_run", "-i", "-m", "0", NULL };
 static const char *dmapps_cmd[]      = { "/home/r_bousset/.local/bin/dmapps", NULL };
 static const char *dmpc_cmd[]        = { "/home/r_bousset/.local/bin/dmpc", NULL };
+static const char *dmbookm_cmd[]     = { "/home/r_bousset/.local/bin/dmbookm", NULL };
 static const char *dmkill_cmd[]      = { "/home/r_bousset/.local/bin/dmkill", NULL };
 static const char *dmsearch_cmd[]    = { "/home/r_bousset/.local/bin/dmsearch", NULL };
 static const char *dmscrot_cmd[]     = { "/home/r_bousset/.local/bin/dmscrot", NULL };
@@ -208,6 +209,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_F11,                   spawn,          {.v = vol_dec_cmd } },
 	{ MODKEY|ShiftMask,             XK_F12,                   spawn,          {.v = vol_inc_cmd } },
 	{ MODKEY|ShiftMask,             XK_Delete,                spawn,          {.v = mic_cmd } },
+	{ MODKEY|ControlMask,           XK_F8,                    spawn,          {.v = dmbookm_cmd } },
 	{ MODKEY|ControlMask,           XK_F9,                    spawn,          {.v = dmkill_cmd } },
 	{ MODKEY|ControlMask,           XK_F10,                   spawn,          {.v = dmscrot_cmd } },
 	{ MODKEY|ControlMask,           XK_F11,                   spawn,          {.v = dmsearch_cmd } },
