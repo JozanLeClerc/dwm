@@ -10,7 +10,7 @@ static const unsigned int systrayonleft = 0;    /* 0: systray in the right corne
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 24;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
@@ -64,22 +64,6 @@ static const char *tagsel[][2] = {
 	{ "#ebdbb2", "#fabd2f" },
 	{ "#ebdbb2", "#83a598" },
 };
-
-/* grid of tags */
-#define DRAWCLASSICTAGS             1 << 0
-#define DRAWTAGGRID                 1 << 1
-
-#define SWITCHTAG_UP                1 << 0
-#define SWITCHTAG_DOWN              1 << 1
-#define SWITCHTAG_LEFT              1 << 2
-#define SWITCHTAG_RIGHT             1 << 3
-#define SWITCHTAG_TOGGLETAG         1 << 4
-#define SWITCHTAG_TAG               1 << 5
-#define SWITCHTAG_VIEW              1 << 6
-#define SWITCHTAG_TOGGLEVIEW        1 << 7
-
-static const unsigned int drawtagmask = DRAWTAGGRID; /* | DRAWCLASSICTAGS to show classic row of tags */
-static const int tagrows = 2;
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -291,14 +275,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_minus,                 setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,                 setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,                 setgaps,        {.i = 0  } },
-	{ MODKEY|ControlMask,           XK_k,                     switchtag,      { .ui = SWITCHTAG_UP     | SWITCHTAG_VIEW } },
-	{ MODKEY|ControlMask,           XK_j,                     switchtag,      { .ui = SWITCHTAG_DOWN   | SWITCHTAG_VIEW } },
-	{ MODKEY|ControlMask,           XK_l,                     switchtag,      { .ui = SWITCHTAG_RIGHT  | SWITCHTAG_VIEW } },
-	{ MODKEY|ControlMask,           XK_h,                     switchtag,      { .ui = SWITCHTAG_LEFT   | SWITCHTAG_VIEW } },
-	{ MODKEY|METAKEY,               XK_k,                     switchtag,      { .ui = SWITCHTAG_UP     | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
-	{ MODKEY|METAKEY,               XK_j,                     switchtag,      { .ui = SWITCHTAG_DOWN   | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
-	{ MODKEY|METAKEY,               XK_l,                     switchtag,      { .ui = SWITCHTAG_RIGHT  | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
-	{ MODKEY|METAKEY,               XK_h,                     switchtag,      { .ui = SWITCHTAG_LEFT   | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
 	TAGKEYS(                        XK_1,                                     0)
 	TAGKEYS(                        XK_2,                                     1)
 	TAGKEYS(                        XK_3,                                     2)
