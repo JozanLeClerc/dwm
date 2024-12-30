@@ -108,7 +108,7 @@ static const Rule rules[] = {
 	{ "org.remmina.Remmina", NULL,       NULL,  1 << 2,    0,           0,         0,          2 },
 	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
 	{ "teams-for-linux",     NULL,       NULL,  0,         1,           0,         0,          1 },
-	{ "thunderbird",         NULL,       NULL,  1 << 1,    0,           0,         0,          1 },
+	{ "thunderbird",         NULL,       NULL,  1 << 2,    0,           0,         0,          1 },
 	{ NULL,                  "spterm",   NULL,  SPTAG(0),  1,           0,         0,         -1 },
 	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
 	{ NULL,                  "pcmanfm",  NULL,  SPTAG(2),  1,           0,         0,         -1 },
