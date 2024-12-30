@@ -58,17 +58,28 @@ static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the b
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 
-static const char *tagsel[][2] = {
+static const char *tagsel[][3] = {
 	/* fg        bg */
-	{ "#cc241d", "#1d2021" }, // red
-	{ "#98971a", "#1d2021" }, // green
-	{ "#d79921", "#1d2021" }, // yellow
-	{ "#458588", "#1d2021" }, // blue
-	{ "#b16286", "#1d2021" }, // magenta
-	{ "#8ec07c", "#1d2021" }, // cyan
-	{ "#d65d0e", "#1d2021" }, // orange
-	{ "#928374", "#1d2021" }, // gray
-	{ "#ebdbb2", "#1d2021" }, // fg
+	// gruvbox light
+	// { "#9d0006", "#1d2021", "" }, // red
+	// { "#79740e", "#1d2021", "" }, // green
+	// { "#b57614", "#1d2021", "" }, // yellow
+	// { "#076678", "#1d2021", "" }, // blue
+	// { "#8f3f71", "#1d2021", "" }, // magenta
+	// { "#427b58", "#1d2021", "" }, // cyan
+	// { "#af3a03", "#1d2021", "" }, // orange
+	// { "#928374", "#1d2021", "" }, // gray
+	// { "#ebdbb2", "#1d2021", "" }, // white
+	// gruvbox dark
+	{ "#cc241d", "#1d2021", "#928374" }, // red
+	{ "#98971a", "#1d2021", "#928374" }, // green
+	{ "#d79921", "#1d2021", "#928374" }, // yellow
+	{ "#458588", "#1d2021", "#928374" }, // blue
+	{ "#b16286", "#1d2021", "#928374" }, // magenta
+	{ "#8ec07c", "#1d2021", "#928374" }, // cyan
+	{ "#d65d0e", "#1d2021", "#928374" }, // orange
+	{ "#928374", "#1d2021", "#928374" }, // gray
+	{ "#ebdbb2", "#1d2021", "#928374" }, // white
 };
 
 static const Rule rules[] = {
