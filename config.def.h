@@ -12,9 +12,9 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 24;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int user_bh            = 30;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "BigBlueTermPlus Nerd Font:size=12" };
+static const char *fonts[]          = { "BigBlueTermPlus Nerd Font:size=15" };
 // static const char *fonts[]          = { "Terminess Nerd Font:style=Bold:size=13" };
 // static const char *fonts[]          = { "GohuFont 11 Nerd Font:size=13" };
 static const char dmenufont[]       = "monospace:size=11";
@@ -22,7 +22,7 @@ static const char col_gray1[]       = "#1d2021"; /* bar background */
 static const char col_gray2[]       = "#32302f"; /* last square, windows borders */
 static const char col_gray3[]       = "#ebdbb2"; /* squares bg, maybe text */
 static const char col_gray4[]       = "#ebdbb2"; /* selected square */
-static const char col_cyan[]        = "#900000"; /* red tint */
+static const char col_cyan[]        = "#9d0006"; /* red tint */
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -50,10 +50,20 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "  ", "  ", "  ", " 󰈹 ", " 󰍹 ", "  ", "  ", "  ", "  " };
+static const char *tags[] = {
+	"  ",
+	"  ",
+	"  ",
+	"  ",
+	"  ",
+	"  ",
+	"  ",
+	"  ",
+	"  "
+};
 
 static const unsigned int ulinepad	= 6;	/* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinestroke	= 3;	/* thickness / height of the underline */
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
@@ -71,15 +81,16 @@ static const char *tagsel[][3] = {
 	// { "#928374", "#1d2021", "" }, // gray
 	// { "#ebdbb2", "#1d2021", "" }, // white
 	// gruvbox dark
-	{ "#cc241d", "#1d2021", "#928374" }, // red
-	{ "#98971a", "#1d2021", "#928374" }, // green
-	{ "#d79921", "#1d2021", "#928374" }, // yellow
-	{ "#458588", "#1d2021", "#928374" }, // blue
-	{ "#b16286", "#1d2021", "#928374" }, // magenta
-	{ "#8ec07c", "#1d2021", "#928374" }, // cyan
-	{ "#d65d0e", "#1d2021", "#928374" }, // orange
-	{ "#928374", "#1d2021", "#928374" }, // gray
-	{ "#ebdbb2", "#1d2021", "#928374" }, // white
+	{ "#cc241d", "#1d2021" }, // red
+	{ "#d65d0e", "#1d2021" }, // orange
+	{ "#d79921", "#1d2021" }, // yellow
+	{ "#458588", "#1d2021" }, // blue
+	{ "#8ec07c", "#1d2021" }, // cyan
+	{ "#98971a", "#1d2021" }, // green
+	{ "#b16286", "#1d2021" }, // magenta
+	{ "#fe8019", "#1d2021" }, // re orange
+	{ "#ebdbb2", "#1d2021" }, // white
+	{ "#7c6f64", "#1d2021" }, // empty
 };
 
 static const Rule rules[] = {
