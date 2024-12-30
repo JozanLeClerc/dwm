@@ -50,19 +50,25 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "  ", "  ", "  ", " 󰈹 ", " 󰍹 ", "  ", "  ", "  ", "  " };
+
+static const unsigned int ulinepad	= 6;	/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
+static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
+
 
 static const char *tagsel[][2] = {
 	/* fg        bg */
-	{ "#ebdbb2", "#cc241d" },
-	{ "#ebdbb2", "#98971a" },
-	{ "#ebdbb2", "#d79921" },
-	{ "#ebdbb2", "#458588" },
-	{ "#ebdbb2", "#b16286" },
-	{ "#ebdbb2", "#fb4934" },
-	{ "#ebdbb2", "#b8bb26" },
-	{ "#ebdbb2", "#fabd2f" },
-	{ "#ebdbb2", "#83a598" },
+	{ "#cc241d", "#1d2021" }, // red
+	{ "#98971a", "#1d2021" }, // green
+	{ "#d79921", "#1d2021" }, // yellow
+	{ "#458588", "#1d2021" }, // blue
+	{ "#b16286", "#1d2021" }, // magenta
+	{ "#8ec07c", "#1d2021" }, // cyan
+	{ "#d65d0e", "#1d2021" }, // orange
+	{ "#928374", "#1d2021" }, // gray
+	{ "#ebdbb2", "#1d2021" }, // fg
 };
 
 static const Rule rules[] = {
