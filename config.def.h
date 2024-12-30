@@ -175,7 +175,7 @@ static const char *browser_cmd[]     = { "firefox", NULL };
 static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
 // static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
 // static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
-static const char *cal_cmd[]         = { "alacritty", "-e", "calcurse", "-C", "/home/r_bousset/.config/calcurse", "-D", "/home/r_bousset/.local/share/calcurse", NULL };
+static const char *cal_cmd[]         = { "alacritty", "-e", "calcurse", "-C", "/home/jozan/.config/calcurse", "-D", "/home/jozan/.local/share/calcurse", NULL };
 static const char *scli_cmd[]        = { "alacritty", "-e", "scli", NULL };
 static const char *mutt_cmd[]        = { "alacritty", "-e", "neomutt", NULL };
 static const char *gotop_cmd[]       = { "alacritty", "-e", "gotop", NULL };
@@ -191,7 +191,7 @@ static const char *mpc_prev_cmd[]    = { "mpc", "prev", NULL };
 static const char *mpc_next_cmd[]    = { "mpc", "next", NULL };
 static const char *mpc_tog_cmd[]     = { "mpc", "toggle", NULL };
 static const char *mpc_stop_cmd[]    = { "mpc", "stop", NULL };
-static const char *killespeak_cmd[]  = { "/home/r_bousset/.local/bin/shutup", NULL };
+static const char *killespeak_cmd[]  = { "/home/jozan/.local/bin/shutup", NULL };
 
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
