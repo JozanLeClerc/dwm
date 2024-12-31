@@ -79,6 +79,8 @@
 #define VERSION_MINOR               0
 #define XEMBED_EMBEDDED_VERSION (VERSION_MAJOR << 16) | VERSION_MINOR
 
+#define SESSION_FILE "/tmp/dwm-session"
+
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeSel }; /* color schemes */
@@ -247,7 +249,9 @@ static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
 static void resizerequest(XEvent *e);
 static void restack(Monitor *m);
+static void restoresession(void);
 static void run(void);
+static void savesession(void);
 static void scan(void);
 static int sendevent(Window w, Atom proto, int m, long d0, long d1, long d2, long d3, long d4);
 static void sendmon(Client *c, Monitor *m);
@@ -2134,6 +2138,8 @@ quit(const Arg *arg)
 	if (arg->i)
 		restart = 1;
 	running = 0;
+	if (restart == 1)
+		savesession();
 }
 
 Monitor *
@@ -2289,6 +2295,58 @@ restack(Monitor *m)
 }
 
 void
+restoresession(void)
+{
+	FILE *fr;
+	Client *c;
+	Monitor *m;
+	char *str;
+	long unsigned int winId;
+	unsigned int tagsForWin;
+	int mon;
+	int check;
+
+	// restore session
+	fr = fopen(SESSION_FILE, "r");
+	if (!fr)
+		return;
+
+	str = malloc(25 * sizeof(char)); // allocate enough space for excepted input from text file
+	while (fscanf(fr, "%[^\n] ", str) != EOF) { // read file till the end
+		check = sscanf(str, "%lu %u %d", &winId, &tagsForWin, &mon); // get data
+		if (check != 3) // break loop if data wasn't read correctly
+			break;
+
+		for (c = selmon->clients; c ; c = c->next) { // add tags to every window by winId
+			if (c->win == winId) {
+				for (m = selmon; m != NULL; m = m->next) {
+					if (m->num == mon) {
+						break;
+					}
+				}
+				sendmon(c, m);
+				c->tags = tagsForWin;
+				break;
+			}
+		}
+    }
+
+	for (c = selmon->clients; c ; c = c->next) { // refocus on windows
+		focus(c);
+		restack(c->mon);
+	}
+
+	for (m = selmon; m; m = m->next) // rearrange all monitors
+		arrange(m);
+
+	free(str);
+	fclose(fr);
+
+	// delete a file
+	// remove(SESSION_FILE);
+}
+
+void
 run(void)
 {
 	XEvent ev;
@@ -2297,6 +2355,22 @@ run(void)
 	while (running && !XNextEvent(dpy, &ev))
 		if (handler[ev.type])
 			handler[ev.type](&ev); /* call handler */
+}
+
+void
+savesession(void)
+{
+	FILE *fw;
+	Client *c;
+	Monitor *m;
+
+	fw = fopen(SESSION_FILE, "w");
+	for (m = selmon; m != NULL; m = m->next) {
+		for (c = m->clients; c != NULL; c = c->next) { // get all the clients with their tags and write them to the file
+			fprintf(fw, "%lu %u %d\n", c->win, c->tags, c->mon->num);
+		}
+	}
+	fclose(fw);
 }
 
 void
@@ -3734,6 +3808,7 @@ main(int argc, char *argv[])
 		die("pledge");
 #endif /* __OpenBSD__ */
 	scan();
+	restoresession();
 	run();
 	if (restart)
 		execvp(argv[0], argv);
