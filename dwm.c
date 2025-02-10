@@ -3478,8 +3478,10 @@ view(const Arg *arg)
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
 		selmon->pertag->prevtag = selmon->pertag->curtag;
 
-		if (arg->ui == ~0)
+		if (arg->ui == ~0) {
+			selmon->tagset[selmon->seltags] = 0x1ff;
 			selmon->pertag->curtag = 0;
+		}
 		else {
 			for (i = 0; !(arg->ui & 1 << i); i++) ;
 			selmon->pertag->curtag = i + 1;
