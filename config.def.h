@@ -33,12 +33,12 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"alacritty", "--class", "spterm", NULL };
-const char *spcmd2[] = {"alacritty", "--class", "spfm", "-e", "zsh", "-ic", "lf", NULL };
-const char *spcmd3[] = {"pcmanfm", NULL };
-const char *spcmd4[] = {"alacritty", "--class", "spflip", "-e", "hf", NULL };
-const char *spcmd5[] = {"alacritty", "--class", "spmpd", "-e", "ncmpc", NULL };
-const char *spcmd6[] = {"alacritty", "--class", "spnews", "-e", "nb", NULL };
+const char *spcmd1[] = { "alacritty", "--class", "spterm", NULL };
+const char *spcmd2[] = { "alacritty", "--class", "spfm", "-e", "zsh", "-ic", "lf", NULL };
+const char *spcmd3[] = { "pcmanfm", NULL };
+const char *spcmd4[] = { "alacritty", "--class", "spflip", "-e", "hf", NULL };
+const char *spcmd5[] = { "alacritty", "--class", "spmpd", "-e", "ncmpc", NULL };
+const char *spcmd6[] = { "alacritty", "--class", "spnews", "-e", "nb", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
 	{"spterm",  spcmd1},
@@ -107,7 +107,7 @@ static const Rule rules[] = {
 	{ "rclone-browser",      NULL,       NULL,  1 << 1,    0,           0,         0,          2 },
 	{ "org.remmina.Remmina", NULL,       NULL,  1 << 2,    0,           0,         0,          2 },
 	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
-	{ "teams-for-linux",     NULL,       NULL,  0,         1,           0,         0,          1 },
+	{ "teams-for-linux",     NULL,       NULL,  0,         0,           0,         0,          1 },
 	{ "thunderbird",         NULL,       NULL,  1 << 2,    0,           0,         0,          1 },
 	{ NULL,                  "spterm",   NULL,  SPTAG(0),  1,           0,         0,         -1 },
 	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
@@ -222,8 +222,9 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_F11,                   spawn,          {.v = vol_dec_cmd } },
 	{ MODKEY|ShiftMask,             XK_F12,                   spawn,          {.v = vol_inc_cmd } },
 	{ MODKEY|ShiftMask,             XK_Delete,                spawn,          {.v = mic_cmd } },
-	{ MODKEY|ControlMask,           XK_F7,                    dmenuspawn,     {.v = dmclip_cmd } },
-	{ MODKEY|ControlMask,           XK_F8,                    dmenuspawn,     {.v = dmbookm_cmd } },
+	{ MODKEY|ControlMask,           XK_Delete,                spawn,          {.v = mic_cmd } },
+	{ MODKEY|ControlMask,           XK_F7,                    dmenuspawn,     {.v = dmbookm_cmd } },
+	{ MODKEY|ControlMask,           XK_F8,                    dmenuspawn,     {.v = dmclip_cmd } },
 	{ MODKEY|ControlMask,           XK_F9,                    dmenuspawn,     {.v = dmkill_cmd } },
 	{ MODKEY|ControlMask,           XK_F10,                   dmenuspawn,     {.v = dmscrot_cmd } },
 	{ MODKEY|ControlMask,           XK_F11,                   dmenuspawn,     {.v = dmsearch_cmd } },
