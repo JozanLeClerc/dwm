@@ -14,7 +14,7 @@ static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 30;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "BlexMono Nerd Font:style=Medium:size=14" };
+static const char *fonts[]          = { "Hack Nerd Font:size=14" };
 // static const char *fonts[]          = { "Terminess Nerd Font:style=Bold:size=13" };
 // static const char *fonts[]          = { "GohuFont 11 Nerd Font:size=13" };
 static const char dmenufont[]       = "monospace:size=11";
