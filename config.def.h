@@ -111,7 +111,7 @@ static const Rule rules[] = {
 	{ "thunderbird",         NULL,       NULL,  1 << 2,    0,           0,         0,          1 },
 	{ NULL,                  "spterm",   NULL,  SPTAG(0),  1,           0,         0,         -1 },
 	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
-	{ NULL,                  "pcmanfm",  NULL,  SPTAG(2),  1,           0,         0,         -1 },
+	{ NULL,                  "pcmanfm",  NULL,  SPTAG(2),  0,           0,         0,         -1 },
 	{ NULL,                  "spflip",   NULL,  SPTAG(3),  1,           1,         0,         -1 },
 	{ NULL,                  "spnews",   NULL,  SPTAG(4),  0,           1,         0,         -1 },
 	{ NULL,                  "spmpd",    NULL,  SPTAG(5),  1,           1,         0,         -1 },
