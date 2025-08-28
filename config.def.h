@@ -36,7 +36,7 @@ typedef struct {
 const char *spcmd1[] = { "alacritty", "--class", "spterm", NULL };
 const char *spcmd2[] = { "alacritty", "--class", "spfm",   "-e", "zsh", "-ic", "lf", NULL };
 const char *spcmd3[] = { "pcmanfm", NULL };
-const char *spcmd4[] = { "alacritty", "--class", "spflip", "-e", "hf", NULL };
+const char *spcmd4[] = { "alacritty", "--class", "spflip", "-e", "zsh", "-ic", "hf", NULL };
 const char *spcmd5[] = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nb", NULL };
 const char *spcmd6[] = { "alacritty", "--class", "spmpd",  "-e", "ncmpc", NULL };
 static Sp scratchpads[] = {
