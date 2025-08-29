@@ -155,7 +155,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *term_cmd[]        = { "alacritty", NULL };
-static const char *hardflip_cmd[]    = { "alacritty", "-e", "hf", NULL };
+static const char *hardflip_cmd[]    = { "alacritty", "-e", "zsh", "-ic", "hf -s", NULL };
 static const char *dmenucmd[]        = { "dmrun", NULL };
 static const char *dmapps_cmd[]      = { "dmapps", NULL };
 static const char *dmpc_cmd[]        = { "dmpc", NULL };
