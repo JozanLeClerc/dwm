@@ -105,10 +105,10 @@ static const Rule rules[] = {
 	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
 	{ "teams-for-linux",     NULL,       NULL,  0,         0,           0,         0,          1 },
 	{ "thunderbird",         NULL,       NULL,  1 << 2,    0,           0,         0,          1 },
-	{ NULL,                  "spterm1",  NULL,  SPTAG(0), 0,           0,         0,         -1 },
-	{ NULL,                  "spterm2",  NULL,  SPTAG(1), 0,           0,         0,         -1 },
-	{ NULL,                  "spnews",   NULL,  SPTAG(4),  0,           1,         0,         -1 },
-	{ NULL,                  "spmpd",    NULL,  SPTAG(5),  0,           1,         0,         -1 },
+	{ NULL,                  "spterm1",  NULL,  SPTAG(0),  0,           0,         0,         -1 },
+	{ NULL,                  "spterm2",  NULL,  SPTAG(1),  0,           0,         0,         -1 },
+	{ NULL,                  "spnews",   NULL,  SPTAG(2),  0,           1,         0,         -1 },
+	{ NULL,                  "spmpd",    NULL,  SPTAG(3),  0,           1,         0,         -1 },
 };
 
 /* layout(s) */
@@ -151,6 +151,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *term_cmd[]        = { "alacritty", NULL };
 static const char *hardflip_cmd[]    = { "alacritty", "-e", "zsh", "-ic", "hf -s", NULL };
 static const char *fm_cmd[]          = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nnn", NULL };
+static const char *guifm_cmd[]       = { "pcmanfm", NULL };
 static const char *dmenucmd[]        = { "dmrun", NULL };
 static const char *dmapps_cmd[]      = { "dmapps", NULL };
 static const char *dmpc_cmd[]        = { "dmpc", NULL };
@@ -195,6 +196,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_Return,                dmenuspawn,     {.v = dmapps_cmd } },
 	{ MODKEY,                       XK_F1,                    spawn,          {.v = term_cmd } },
 	{ MODKEY,                       XK_F2,                    spawn,          {.v = fm_cmd } },
+	{ MODKEY|ShiftMask,             XK_F2,                    spawn,          {.v = guifm_cmd } },
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browser_cmd } },
 	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = torbro_cmd } },
 	{ MODKEY,                       XK_F5,                    togglescratch,  {.ui = 0 } },
