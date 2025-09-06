@@ -33,20 +33,16 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = { "alacritty", "--class", "spterm", NULL };
-const char *spcmd2[] = { "alacritty", "--class", "spfm",   "-e", "zsh", "-ic", "lf", NULL };
-const char *spcmd3[] = { "pcmanfm", NULL };
-const char *spcmd4[] = { "alacritty", "--class", "spflip", "-e", "zsh", "-ic", "hf", NULL };
-const char *spcmd5[] = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nb", NULL };
-const char *spcmd6[] = { "alacritty", "--class", "spmpd",  "-e", "ncmpc", NULL };
+const char *spcmd1[] = { "alacritty", "--class", "spterm1", NULL };
+const char *spcmd2[] = { "alacritty", "--class", "spterm2", NULL };
+const char *spcmd3[] = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nb", NULL };
+const char *spcmd4[] = { "alacritty", "--class", "spmpd",  "-e", "ncmpc", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
-	{"spterm",  spcmd1},
-	{"spfm",    spcmd2},
-	{"spfmgui", spcmd3},
-	{"spflip",  spcmd4},
-	{"spnews",  spcmd5},
-	{"spmpd",   spcmd6},
+	{"spterm1", spcmd1},
+	{"spterm2", spcmd2},
+	{"spnews",  spcmd3},
+	{"spmpd",   spcmd4},
 };
 
 /* tagging */
@@ -109,12 +105,10 @@ static const Rule rules[] = {
 	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
 	{ "teams-for-linux",     NULL,       NULL,  0,         0,           0,         0,          1 },
 	{ "thunderbird",         NULL,       NULL,  1 << 2,    0,           0,         0,          1 },
-	{ NULL,                  "spterm",   NULL,  SPTAG(0),  1,           0,         0,         -1 },
-	{ NULL,                  "spfm",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
-	{ NULL,                  "pcmanfm",  NULL,  SPTAG(2),  0,           0,         0,         -1 },
-	{ NULL,                  "spflip",   NULL,  SPTAG(3),  1,           1,         0,         -1 },
+	{ NULL,                  "spterm1",  NULL,  SPTAG(0), 0,           0,         0,         -1 },
+	{ NULL,                  "spterm2",  NULL,  SPTAG(1), 0,           0,         0,         -1 },
 	{ NULL,                  "spnews",   NULL,  SPTAG(4),  0,           1,         0,         -1 },
-	{ NULL,                  "spmpd",    NULL,  SPTAG(5),  1,           1,         0,         -1 },
+	{ NULL,                  "spmpd",    NULL,  SPTAG(5),  0,           1,         0,         -1 },
 };
 
 /* layout(s) */
@@ -156,6 +150,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *term_cmd[]        = { "alacritty", NULL };
 static const char *hardflip_cmd[]    = { "alacritty", "-e", "zsh", "-ic", "hf -s", NULL };
+static const char *fm_cmd[]          = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nnn", NULL };
 static const char *dmenucmd[]        = { "dmrun", NULL };
 static const char *dmapps_cmd[]      = { "dmapps", NULL };
 static const char *dmpc_cmd[]        = { "dmpc", NULL };
@@ -176,8 +171,6 @@ static const char *browser_cmd[]     = { "firefox", NULL };
 static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
 // static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
 // static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
-static const char *cal_cmd[]         = { "alacritty", "-e", "calcurse", "-C", "/home/jozan/.config/calcurse", "-D", "/home/jozan/.local/share/calcurse", NULL };
-static const char *scli_cmd[]        = { "alacritty", "-e", "scli", NULL };
 static const char *mutt_cmd[]        = { "alacritty", "-e", "neomutt", NULL };
 static const char *gotop_cmd[]       = { "alacritty", "-e", "gotop", NULL };
 static const char *htop_cmd[]        = { "alacritty", "-e", "htop", NULL };
@@ -200,16 +193,14 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return,                spawn,          {.v = term_cmd } },
 	{ MODKEY|ControlMask|ShiftMask, XK_Return,                spawn,          {.v = hardflip_cmd } },
 	{ MODKEY|ControlMask,           XK_Return,                dmenuspawn,     {.v = dmapps_cmd } },
-	{ MODKEY,                       XK_F1,                    togglescratch,  {.ui = 0 } },
-	{ MODKEY,                       XK_F2,                    togglescratch,  {.ui = 1 } },
-	{ MODKEY|ShiftMask,             XK_F2,                    togglescratch,  {.ui = 2 } },
+	{ MODKEY,                       XK_F1,                    spawn,          {.v = term_cmd } },
+	{ MODKEY,                       XK_F2,                    spawn,          {.v = fm_cmd } },
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browser_cmd } },
 	{ MODKEY|ShiftMask,             XK_F3,                    spawn,          {.v = torbro_cmd } },
-	{ MODKEY,                       XK_F4,                    togglescratch,  {.ui = 3 } },
-	{ MODKEY,                       XK_F5,                    togglescratch,  {.ui = 4 } },
-	{ MODKEY,                       XK_F6,                    togglescratch,  {.ui = 5 } },
-	{ MODKEY,                       XK_F7,                    spawn,          {.v = cal_cmd } },
-	{ MODKEY,                       XK_F8,                    spawn,          {.v = scli_cmd } },
+	{ MODKEY,                       XK_F5,                    togglescratch,  {.ui = 0 } },
+	{ MODKEY,                       XK_F6,                    togglescratch,  {.ui = 1 } },
+	{ MODKEY,                       XK_F7,                    togglescratch,  {.ui = 2 } },
+	{ MODKEY,                       XK_F8,                    togglescratch,  {.ui = 3 } },
 	{ MODKEY,                       XK_F9,                    spawn,          {.v = mutt_cmd } },
 	{ MODKEY,                       XK_F10,                   spawn,          {.v = gotop_cmd } },
 	{ MODKEY,                       XK_F11,                   spawn,          {.v = htop_cmd } },
