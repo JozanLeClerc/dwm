@@ -33,16 +33,16 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = { "alacritty", "--class", "spterm1", NULL };
-const char *spcmd2[] = { "alacritty", "--class", "spterm2", NULL };
-const char *spcmd3[] = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nb", NULL };
-const char *spcmd4[] = { "alacritty", "--class", "spmpd",  "-e", "ncmpc", NULL };
+const char *spcmd1[] = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nb", NULL };
+const char *spcmd2[] = { "alacritty", "--class", "spmpd",  "-e", "ncmpc", NULL };
+const char *spcmd3[] = { "alacritty", "--class", "spterm1", NULL };
+const char *spcmd4[] = { "alacritty", "--class", "spterm2", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
-	{"spterm1", spcmd1},
-	{"spterm2", spcmd2},
-	{"spnews",  spcmd3},
-	{"spmpd",   spcmd4},
+	{"spnews",  spcmd1},
+	{"spmpd",   spcmd2},
+	{"spterm1", spcmd3},
+	{"spterm2", spcmd4},
 };
 
 /* tagging */
@@ -105,10 +105,10 @@ static const Rule rules[] = {
 	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
 	{ "teams-for-linux",     NULL,       NULL,  0,         0,           0,         0,          1 },
 	{ "thunderbird",         NULL,       NULL,  1 << 2,    0,           0,         0,          1 },
-	{ NULL,                  "spterm1",  NULL,  SPTAG(0),  0,           0,         0,         -1 },
-	{ NULL,                  "spterm2",  NULL,  SPTAG(1),  0,           0,         0,         -1 },
-	{ NULL,                  "spnews",   NULL,  SPTAG(2),  0,           1,         0,         -1 },
-	{ NULL,                  "spmpd",    NULL,  SPTAG(3),  0,           1,         0,         -1 },
+	{ NULL,                  "spnews",   NULL,  SPTAG(0),  0,           1,         0,         -1 },
+	{ NULL,                  "spmpd",    NULL,  SPTAG(1),  0,           1,         0,         -1 },
+	{ NULL,                  "spterm1",  NULL,  SPTAG(2),  0,           0,         0,         -1 },
+	{ NULL,                  "spterm2",  NULL,  SPTAG(3),  0,           0,         0,         -1 },
 };
 
 /* layout(s) */
