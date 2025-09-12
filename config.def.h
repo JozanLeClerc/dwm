@@ -34,7 +34,7 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nb", NULL };
-const char *spcmd2[] = { "alacritty", "--class", "spmu",  "-e", "cmus", NULL };
+const char *spcmd2[] = { "alacritty", "--class", "spmu",   "-e", "cmus", NULL };
 const char *spcmd3[] = { "alacritty", "--class", "spterm1", NULL };
 const char *spcmd4[] = { "alacritty", "--class", "spterm2", NULL };
 static Sp scratchpads[] = {
@@ -182,9 +182,9 @@ static const char *vol_tog_cmd[]     = { "mixer-set", "toggle", NULL };
 static const char *vol_dec_cmd[]     = { "mixer-set", "lower", NULL };
 static const char *vol_inc_cmd[]     = { "mixer-set", "raise", NULL };
 static const char *mic_cmd[]         = { "mic", NULL };
-static const char *mpc_prev_cmd[]    = { "mpc", "prev", NULL };
-static const char *mpc_next_cmd[]    = { "mpc", "next", NULL };
-static const char *cmus_tog_cmd[]     = { "cmus-remote", "-u", NULL };
+static const char *cmus_prev_cmd[]   = { "cmus-remote", "-r", NULL };
+static const char *cmus_next_cmd[]   = { "cmus-remote", "-n", NULL };
+static const char *cmus_tog_cmd[]    = { "cmus-remote", "-u", NULL };
 static const char *mpc_stop_cmd[]    = { "mpc", "stop", NULL };
 static const char *killespeak_cmd[]  = { "/home/jozan/.local/bin/shutup", NULL };
 
@@ -207,9 +207,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F10,                   spawn,          {.v = gotop_cmd } },
 	{ MODKEY,                       XK_F11,                   spawn,          {.v = htop_cmd } },
 	{ MODKEY,                       XK_F12,                   spawn,          {.v = top_cmd } },
-	{ MODKEY|ShiftMask,             XK_F6,                    spawn,          {.v = mpc_prev_cmd } },
+	{ MODKEY|ShiftMask,             XK_F6,                    spawn,          {.v = cmus_prev_cmd } },
 	{ MODKEY|ShiftMask,             XK_F7,                    spawn,          {.v = cmus_tog_cmd } },
-	{ MODKEY|ShiftMask,             XK_F8,                    spawn,          {.v = mpc_next_cmd } },
+	{ MODKEY|ShiftMask,             XK_F8,                    spawn,          {.v = cmus_next_cmd } },
 	{ MODKEY|ShiftMask,             XK_F9,                    spawn,          {.v = mpc_stop_cmd } },
 	{ MODKEY|ShiftMask,             XK_F10,                   spawn,          {.v = vol_tog_cmd } },
 	{ MODKEY|ShiftMask,             XK_F11,                   spawn,          {.v = vol_dec_cmd } },
@@ -234,8 +234,8 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioLowerVolume,  spawn,          {.v = vol_dec_cmd } },
 	{ 0,                            XF86XK_AudioMute,         spawn,          {.v = vol_tog_cmd } },
 	{ 0,                            XF86XK_AudioPlay,         spawn,          {.v = cmus_tog_cmd } },
-	{ 0,                            XF86XK_AudioPrev,         spawn,          {.v = mpc_prev_cmd } },
-	{ 0,                            XF86XK_AudioNext,         spawn,          {.v = mpc_next_cmd } },
+	{ 0,                            XF86XK_AudioPrev,         spawn,          {.v = cmus_prev_cmd } },
+	{ 0,                            XF86XK_AudioNext,         spawn,          {.v = cmus_next_cmd } },
 	{ MODKEY,                       XK_Delete,                spawn,          {.v = killespeak_cmd } },
 	{ MODKEY,                       XK_b,                     togglebar,      {0} },
 	{ MODKEY,                       XK_j,                     focusstack,     {.i = +1 } },
