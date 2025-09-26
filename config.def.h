@@ -226,6 +226,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_BackSpace,             dmenuspawn,     {.v = dmlog_cmd } },
 	{ MODKEY,                       XK_BackSpace,             dmenuspawn,     {.v = dmpc_cmd } },
 	{ MODKEY,                       XK_backslash,             dmenuspawn,     {.v = dmhc_cmd } },
+	{ MODKEY|ControlMask,           XK_backslash,             dmenuspawn,     {.v = dmhc_cmd } },
 	{ MODKEY|ControlMask,           XK_p,                     dmenuspawn,     {.v = dmpass_cmd } },
 	{ MODKEY|ControlMask|ShiftMask, XK_p,                     dmenuspawn,     {.v = dmpass_full_cmd } },
 	{ MODKEY|ControlMask,           XK_o,                     dmenuspawn,     {.v = dmotp_cmd } },
