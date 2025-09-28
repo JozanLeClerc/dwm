@@ -33,10 +33,10 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = { "alacritty", "--class", "spnews", "-e", "zsh", "-ic", "nb", NULL };
-const char *spcmd2[] = { "alacritty", "--class", "spmu",   "-e", "cmus", NULL };
-const char *spcmd3[] = { "alacritty", "--class", "spterm1", NULL };
-const char *spcmd4[] = { "alacritty", "--class", "spterm2", NULL };
+const char *spcmd1[] = { "st", "-n", "spnews", "-e", "zsh", "-ic", "nb", NULL };
+const char *spcmd2[] = { "st", "-n", "spmu",   "-e", "cmus", NULL };
+const char *spcmd3[] = { "st", "-n", "spterm1", NULL };
+const char *spcmd4[] = { "st", "-n", "spterm2", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
 	{"spnews",  spcmd1},
@@ -148,9 +148,9 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *term_cmd[]        = { "alacritty", NULL };
-static const char *hardflip_cmd[]    = { "alacritty", "-e", "zsh", "-ic", "hf -s", NULL };
-static const char *fm_cmd[]          = { "alacritty", "-e", "zsh", "-ic", "nnn", NULL };
+static const char *term_cmd[]        = { "st", NULL };
+static const char *hardflip_cmd[]    = { "st", "-e", "zsh", "-ic", "hf -s", NULL };
+static const char *fm_cmd[]          = { "st", "-e", "zsh", "-ic", "nnn", NULL };
 static const char *guifm_cmd[]       = { "pcmanfm", NULL };
 static const char *dmenucmd[]        = { "dmrun", NULL };
 static const char *dmapps_cmd[]      = { "dmapps", NULL };
@@ -173,10 +173,10 @@ static const char *browser_cmd[]     = { "firefox", NULL };
 static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
 // static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
 // static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
-static const char *mutt_cmd[]        = { "alacritty", "-e", "neomutt", NULL };
-static const char *gotop_cmd[]       = { "alacritty", "-e", "gotop", NULL };
-static const char *htop_cmd[]        = { "alacritty", "-e", "htop", NULL };
-static const char *top_cmd[]         = { "alacritty", "-e", "top", NULL };
+static const char *mutt_cmd[]        = { "st", "-e", "neomutt", NULL };
+static const char *gotop_cmd[]       = { "st", "-e", "gotop", NULL };
+static const char *htop_cmd[]        = { "st", "-e", "htop", NULL };
+static const char *top_cmd[]         = { "st", "-e", "top", NULL };
 static const char *bl_inc_cmd[]      = { "xbacklight", "-inc", "10", NULL };
 static const char *bl_dec_cmd[]      = { "xbacklight", "-dec", "10", NULL };
 static const char *vol_tog_cmd[]     = { "mixer-set", "toggle", NULL };
