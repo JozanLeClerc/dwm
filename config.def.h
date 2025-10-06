@@ -33,16 +33,18 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = { "st", "-n", "spnews", "-e", "zsh", "-ic", "nb", NULL };
+const char *spcmd1[] = { "st", "-n", "spnews", "-e", "sfeed_curses", "$XDG_DATA_HOME/sfeed/feeds/*", NULL };
 const char *spcmd2[] = { "st", "-n", "spmu",   "-e", "cmus", NULL };
 const char *spcmd3[] = { "st", "-n", "spterm1", NULL };
 const char *spcmd4[] = { "st", "-n", "spterm2", NULL };
+const char *spcmd5[] = { "st", "-n", "spmail", "-e", "neomutt", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
 	{"spnews",  spcmd1},
 	{"spmu",    spcmd2},
 	{"spterm1", spcmd3},
 	{"spterm2", spcmd4},
+	{"spmail",  spcmd5},
 };
 
 /* tagging */
@@ -109,6 +111,7 @@ static const Rule rules[] = {
 	{ NULL,                  "spmu",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
 	{ NULL,                  "spterm1",  NULL,  SPTAG(2),  0,           0,         0,         -1 },
 	{ NULL,                  "spterm2",  NULL,  SPTAG(3),  0,           0,         0,         -1 },
+	{ NULL,                  "spmail",   NULL,  SPTAG(4),  0,           0,         0,         -1 },
 };
 
 /* layout(s) */
@@ -174,7 +177,6 @@ static const char *alt_browser_cmd[] = { "surf", "https://duck.com/", NULL };
 static const char *torbro_cmd[]      = { "torify", "librewolf", NULL };
 // static const char *nb_cmd[]          = { "alacritty", "-e", "newsboat", NULL };
 // static const char *ncmpc_cmd[]       = { "alacritty", "-e", "ncmpc", NULL };
-static const char *mutt_cmd[]        = { "st", "-e", "neomutt", NULL };
 static const char *gotop_cmd[]       = { "st", "-e", "gotop", NULL };
 static const char *htop_cmd[]        = { "st", "-e", "htop", NULL };
 static const char *top_cmd[]         = { "st", "-e", "top", NULL };
@@ -206,7 +208,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F6,                    togglescratch,  {.ui = 1 } },
 	{ MODKEY,                       XK_F7,                    togglescratch,  {.ui = 2 } },
 	{ MODKEY,                       XK_F8,                    togglescratch,  {.ui = 3 } },
-	{ MODKEY,                       XK_F9,                    spawn,          {.v = mutt_cmd } },
+	{ MODKEY,                       XK_F9,                    togglescratch,  {.ui = 4 } },
 	{ MODKEY,                       XK_F10,                   spawn,          {.v = gotop_cmd } },
 	{ MODKEY,                       XK_F11,                   spawn,          {.v = htop_cmd } },
 	{ MODKEY,                       XK_F12,                   spawn,          {.v = top_cmd } },
