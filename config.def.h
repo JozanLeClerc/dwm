@@ -33,7 +33,7 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = { "st", "-n", "spnews", "-e", "sfeed_curses", "$XDG_DATA_HOME/sfeed/feeds/*", NULL };
+const char *spcmd1[] = { "st", "-n", "spnews", "-e", "sf", NULL };
 const char *spcmd2[] = { "st", "-n", "spmu",   "-e", "cmus", NULL };
 const char *spcmd3[] = { "st", "-n", "spterm1", NULL };
 const char *spcmd4[] = { "st", "-n", "spterm2", NULL };
