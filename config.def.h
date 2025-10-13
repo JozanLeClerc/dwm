@@ -33,11 +33,11 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = { "st", "-n", "spnews", "-e", "sf", NULL };
-const char *spcmd2[] = { "st", "-n", "spmu",   "-e", "cmus", NULL };
-const char *spcmd3[] = { "st", "-n", "spterm1", NULL };
-const char *spcmd4[] = { "st", "-n", "spterm2", NULL };
-const char *spcmd5[] = { "st", "-n", "spmail", "-e", "neomutt", NULL };
+const char *spcmd1[] = { "st", "-n", "spnews",  "-g", "165x25", "-e", "sf", NULL };
+const char *spcmd2[] = { "st", "-n", "spmu",    "-g", "100x28", "-e", "cmus", NULL };
+const char *spcmd3[] = { "st", "-n", "spterm1", "-g", "80x25", NULL };
+const char *spcmd4[] = { "st", "-n", "spterm2", "-g", "80x25", NULL };
+const char *spcmd5[] = { "st", "-n", "spmail",  "-g", "120x25", "-e", "neomutt", NULL };
 static Sp scratchpads[] = {
 	/* name     cmd  */
 	{"spnews",  spcmd1},
@@ -107,11 +107,11 @@ static const Rule rules[] = {
 	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
 	{ "teams-for-linux",     NULL,       NULL,  0,         0,           0,         0,          1 },
 	{ "thunderbird",         NULL,       NULL,  1 << 2,    0,           0,         0,          1 },
-	{ NULL,                  "spnews",   NULL,  SPTAG(0),  0,           1,         0,         -1 },
+	{ NULL,                  "spnews",   NULL,  SPTAG(0),  1,           1,         0,         -1 },
 	{ NULL,                  "spmu",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
-	{ NULL,                  "spterm1",  NULL,  SPTAG(2),  0,           0,         0,         -1 },
-	{ NULL,                  "spterm2",  NULL,  SPTAG(3),  0,           0,         0,         -1 },
-	{ NULL,                  "spmail",   NULL,  SPTAG(4),  0,           0,         0,         -1 },
+	{ NULL,                  "spterm1",  NULL,  SPTAG(2),  1,           0,         0,         -1 },
+	{ NULL,                  "spterm2",  NULL,  SPTAG(3),  1,           0,         0,         -1 },
+	{ NULL,                  "spmail",   NULL,  SPTAG(4),  1,           0,         0,         -1 },
 };
 
 /* layout(s) */
@@ -199,7 +199,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return,                spawn,          {.v = term_cmd } },
 	{ MODKEY|ControlMask|ShiftMask, XK_Return,                spawn,          {.v = hardflip_cmd } },
 	{ MODKEY|ControlMask,           XK_Return,                dmenuspawn,     {.v = dmapps_cmd } },
-	{ MODKEY,                       XK_F1,                    spawn,          {.v = term_cmd } },
+	{ MODKEY,                       XK_F1,                    spawn,          {.v = fm_cmd } },
 	{ MODKEY,                       XK_F2,                    spawn,          {.v = fm_cmd } },
 	{ MODKEY|ShiftMask,             XK_F2,                    spawn,          {.v = guifm_cmd } },
 	{ MODKEY,                       XK_F3,                    spawn,          {.v = browser_cmd } },
