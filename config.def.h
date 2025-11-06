@@ -49,6 +49,16 @@ static Sp scratchpads[] = {
 
 /* tagging */
 static const char *tags[] = {
+	" [!] ",
+	" [@] ",
+	" [#] ",
+	" [$] ",
+	" [%] ",
+	" [^] ",
+	" [&] ",
+	" [*] ",
+	" [(] "
+/*
 	"  ",
 	"  ",
 	"  ",
@@ -58,6 +68,7 @@ static const char *tags[] = {
 	"  ",
 	"  ",
 	"  "
+*/
 };
 
 static const unsigned int ulinepad	= 6;	/* horizontal padding between the underline and tag */
