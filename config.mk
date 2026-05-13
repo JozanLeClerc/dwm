@@ -30,9 +30,9 @@ CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VE
 #CFLAGS   = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
 HOSTNAME = $(shell /usr/bin/hostname -s)
 
-CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -march=alderlake -Os -pipe ${INCS} ${CPPFLAGS}
+CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -march=lunarlake -Os -pipe ${INCS} ${CPPFLAGS}
 ifeq (${HOSTNAME}, mother)
-CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -march=haswell -Os -pipe ${INCS} ${CPPFLAGS}
+CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -march=raptorlake -Os -pipe ${INCS} ${CPPFLAGS}
 endif
 LDFLAGS  = ${LIBS}
 
