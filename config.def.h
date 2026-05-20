@@ -205,7 +205,6 @@ static const char *cmus_prev_cmd[]   = { "cmus-remote", "-r", NULL };
 static const char *cmus_next_cmd[]   = { "cmus-remote", "-n", NULL };
 static const char *cmus_tog_cmd[]    = { "cmus-remote", "-u", NULL };
 static const char *mpc_stop_cmd[]    = { "mpc", "stop", NULL };
-static const char *killespeak_cmd[]  = { "/home/jozan/.local/bin/shutup", NULL };
 
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
