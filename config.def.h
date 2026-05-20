@@ -119,6 +119,7 @@ static const Rule rules[] = {
 	{ "Vmware",              NULL,       NULL,  1 << 3,    0,           0,         0,          2 },
 	{ "teams-for-linux",     NULL,       NULL,  0,         0,           0,         0,          1 },
 	{ "Nextcloud Talk",      NULL,       NULL,  0,         0,           0,         0,          1 },
+	{ "easyeffects",         NULL,       NULL,  1 << 1,    0,           0,         0,          1 },
 	{ "thunderbird",         NULL,       NULL,  1 << 2,    0,           0,         0,          1 },
 	{ NULL,                  "spnews",   NULL,  SPTAG(0),  1,           1,         0,         -1 },
 	{ NULL,                  "spmu",     NULL,  SPTAG(1),  1,           1,         0,         -1 },
