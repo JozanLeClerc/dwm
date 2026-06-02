@@ -19,7 +19,7 @@ static const char *fonts[]          = { "BlexMono Nerd Font:style=Medium:size=13
 // static const char *fonts[]          = { "MonaspiceNe Nerd Font:size=12" };
 // static const char *fonts[]          = { "Terminess Nerd Font:style=Bold:size=12" };
 static const char dmenufont[]       = "monospace:size=11";
-static const char col_gray1[]       = "#1d2021"; /* bar background */
+static const char col_gray1[]       = "#1b1b1b"; /* bar background */
 static const char col_gray2[]       = "#32302f"; /* last square, windows borders */
 static const char col_gray3[]       = "#ebdbb2"; /* squares bg, maybe text */
 static const char col_gray4[]       = "#ebdbb2"; /* selected square */
@@ -91,16 +91,16 @@ static const char *tagsel[][3] = {
 	// { "#928374", "#1d2021", "" }, // gray
 	// { "#ebdbb2", "#1d2021", "" }, // white
 	// gruvbox dark
-	{ "#cc241d", "#1d2021" }, // red
-	{ "#d65d0e", "#1d2021" }, // orange
-	{ "#d79921", "#1d2021" }, // yellow
-	{ "#458588", "#1d2021" }, // blue
-	{ "#8ec07c", "#1d2021" }, // cyan
-	{ "#98971a", "#1d2021" }, // green
-	{ "#b16286", "#1d2021" }, // magenta
-	{ "#fe8019", "#1d2021" }, // re orange
-	{ "#ebdbb2", "#1d2021" }, // white
-	{ "#7c6f64", "#1d2021" }, // empty
+	{ "#cc241d", "#1b1b1b" }, // red
+	{ "#d65d0e", "#1b1b1b" }, // orange
+	{ "#d79921", "#1b1b1b" }, // yellow
+	{ "#458588", "#1b1b1b" }, // blue
+	{ "#8ec07c", "#1b1b1b" }, // cyan
+	{ "#98971a", "#1b1b1b" }, // green
+	{ "#b16286", "#1b1b1b" }, // magenta
+	{ "#fe8019", "#1b1b1b" }, // re orange
+	{ "#ebdbb2", "#1b1b1b" }, // white
+	{ "#7c6f64", "#1b1b1b" }, // empty
 };
 
 static const Rule rules[] = {
