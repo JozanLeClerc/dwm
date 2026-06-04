@@ -17,7 +17,7 @@ static const int user_bh            = 30;       /* 0 means that dwm will calcula
 static const int focusonwheel       = 0;
 // static const char *fonts[]          = { "BlexMono Nerd Font:style=Medium:size=13" };
 // static const char *fonts[]          = { "MonaspiceNe Nerd Font:size=12" };
-static const char *fonts[]          = { "Terminus (TTF):style=Bold:size=15" };
+static const char *fonts[]          = { "Terminus (TTF):style=Bold:size=13" };
 static const char dmenufont[]       = "monospace:size=11";
 static const char col_gray1[]       = "#1b1b1b"; /* bar background */
 static const char col_gray2[]       = "#282828"; /* last square, windows borders */
