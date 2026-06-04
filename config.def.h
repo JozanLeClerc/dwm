@@ -20,7 +20,7 @@ static const char *fonts[]          = { "BlexMono Nerd Font:style=Medium:size=13
 // static const char *fonts[]          = { "Terminess Nerd Font:style=Bold:size=12" };
 static const char dmenufont[]       = "monospace:size=11";
 static const char col_gray1[]       = "#1b1b1b"; /* bar background */
-static const char col_gray2[]       = "#1b1b1b"; /* last square, windows borders */
+static const char col_gray2[]       = "#282828"; /* last square, windows borders */
 static const char col_gray3[]       = "#ebdbb2"; /* squares bg, maybe text */
 static const char col_gray4[]       = "#ebdbb2"; /* selected square */
 static const char col_cyan[]        = "#9d0006"; /* red tint */
