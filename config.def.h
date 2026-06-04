@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 24;       /* snap pixel */
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
@@ -17,7 +17,7 @@ static const int user_bh            = 30;       /* 0 means that dwm will calcula
 static const int focusonwheel       = 0;
 // static const char *fonts[]          = { "BlexMono Nerd Font:style=Medium:size=13" };
 // static const char *fonts[]          = { "MonaspiceNe Nerd Font:size=12" };
-static const char *fonts[]          = { "Terminess Nerd Font:style=Bold:size=14" };
+static const char *fonts[]          = { "Terminus (TTF):style=Bold:size=15" };
 static const char dmenufont[]       = "monospace:size=11";
 static const char col_gray1[]       = "#1b1b1b"; /* bar background */
 static const char col_gray2[]       = "#282828"; /* last square, windows borders */
