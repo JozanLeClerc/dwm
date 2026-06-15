@@ -259,6 +259,7 @@ static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
+static void fullscreen(const Arg *arg);
 static void setgaps(const Arg *arg);
 static void setlayout(const Arg *arg);
 static void setcfact(const Arg *arg);
@@ -281,7 +282,7 @@ static void tile(Monitor *m);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void toggleforegrounded(const Arg *arg);
-static void togglefullscr(const Arg *arg);
+// static void togglefullscr(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
@@ -2523,6 +2524,22 @@ setfullscreen(Client *c, int fullscreen)
 	}
 }
 
+Layout *last_layout;
+void
+fullscreen(const Arg *arg)
+{
+	if (selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] != &layouts[2]) {
+		for(last_layout = (Layout *)layouts; last_layout != selmon->lt[selmon->sellt]; last_layout++);
+		setlayout(&((Arg) { .v = &layouts[6] }));
+		if (selmon->showbar)
+			togglebar(arg);
+	} else {
+		setlayout(&((Arg) { .v = last_layout }));
+		if (!selmon->showbar)
+			togglebar(arg);
+	}
+}
+
 void
 setgaps(const Arg *arg)
 {
@@ -2982,12 +2999,12 @@ toggleforegrounded(const Arg *arg)
 	arrange(selmon);
 }
 
-void
+/* void
 togglefullscr(const Arg *arg)
 {
 	if(selmon->sel)
 		setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
-}
+} */
 
 void
 togglescratch(const Arg *arg)

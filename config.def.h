@@ -287,12 +287,12 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[3]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[4]} }, /* centeredfloatingmaster */
 	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[5]} }, /* centeredmaster */
-	{ MODKEY,                       XK_f,                     setlayout,      {.v = &layouts[6]} }, /* monocle */
+	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[6]} }, /* monocle */
 	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[7]} }, /* floating */
+	{ MODKEY,                       XK_f,                     fullscreen,     {0} },
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
 	{ MODKEY,                       XK_space,                 togglefloating, {0} },
 	{ MODKEY|ControlMask,           XK_space,                 toggleforegrounded, {0} },
-	{ MODKEY,                       XK_m,                     togglefullscr,  {0} },
 	{ MODKEY,                       XK_Down,                  moveresize,     {.v = "0x 25y 0w 0h" } },
 	{ MODKEY,                       XK_Up,                    moveresize,     {.v = "0x -25y 0w 0h" } },
 	{ MODKEY,                       XK_Right,                 moveresize,     {.v = "25x 0y 0w 0h" } },
