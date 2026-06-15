@@ -311,6 +311,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void gridall(const Arg *arg);
 
 static pid_t getparentprocess(pid_t p);
 static int isdescprocess(pid_t p, pid_t c);
@@ -2525,17 +2526,19 @@ setfullscreen(Client *c, int fullscreen)
 }
 
 Layout *last_layout;
+int last_showbar;
 void
 fullscreen(const Arg *arg)
 {
-	if (selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] != &layouts[2]) {
+	if (selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] != &layouts[6]) {
 		for(last_layout = (Layout *)layouts; last_layout != selmon->lt[selmon->sellt]; last_layout++);
+		last_showbar = selmon->showbar;
 		setlayout(&((Arg) { .v = &layouts[6] }));
 		if (selmon->showbar)
 			togglebar(arg);
 	} else {
 		setlayout(&((Arg) { .v = last_layout }));
-		if (!selmon->showbar)
+		if (!selmon->showbar && last_showbar)
 			togglebar(arg);
 	}
 }
@@ -3763,6 +3766,14 @@ winview(const Arg* arg){
 		return;
 	a.ui = c->tags;
 	view(&a);
+}
+
+/* by desgua */
+void
+gridall(const Arg *arg)
+{
+	view(&(Arg){.ui = ~0});
+	setlayout(&(Arg){.v = &layouts[5]});
 }
 
 /* There's no way to check accesses to destroyed windows, thus those cases are
