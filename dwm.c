@@ -860,7 +860,7 @@ cleanup(void)
 	for (i = 0; i < LENGTH(colors) + 1; i++)
 		drw_scm_free(drw, scheme[i], 3);
 	free(scheme);
-	for (i = 0; i < LENGTH(tags); i++)
+	for (i = 0; i < LENGTH(tagsel); i++)
 		drw_scm_free(drw, tagscheme[i], 2);
 	free(tagscheme);
 	XDestroyWindow(dpy, wmcheckwin);
@@ -1175,7 +1175,7 @@ drawbar(Monitor *m)
         if (occ & 1 << i)
             drw_setscheme(drw, tagscheme[i]);
         else
-            drw_setscheme(drw, tagscheme[9]);
+            drw_setscheme(drw, tagscheme[10]);
 		// drw_setscheme(drw, (m->tagset[m->seltags] & 1 << i ? tagscheme[i] : scheme[SchemeNorm]));
 		drw_text(drw, x, 0, bh, bh, 0, "", urg & 1 << i);
 		// if (ulineall || m->tagset[m->seltags] & 1 << i) /* if there are conflicts, just move these lines directly underneath both 'drw_setscheme' and 'drw_text' :) */
@@ -1365,7 +1365,9 @@ focus(Client *c)
 				break;
 			}
 		}
-		// XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
+		if (focused_tag == ((1 << 9) - 1)) {
+			i = 10;
+		}
 		XSetWindowBorder(dpy, c->win, tagscheme[i - 1][0].pixel);
 		setfocus(c);
 	} else {

@@ -100,9 +100,10 @@ static const char *tagsel[][3] = {
 	{ "#8ec07c", "#1b1b1b" }, // cyan
 	{ "#98971a", "#1b1b1b" }, // green
 	{ "#b16286", "#1b1b1b" }, // magenta
-	{ "#fe8019", "#1b1b1b" }, // re orange
-	{ "#ebdbb2", "#1b1b1b" }, // white
-	{ "#7c6f64", "#1b1b1b" }, // empty
+	{ "#83a598", "#1b1b1b" }, // re blue
+	{ "#fb4934", "#1b1b1b" }, // re red
+	{ "#d5c4a1", "#1b1b1b" }, // alltag, white
+	{ "#504945", "#1b1b1b" }, // empty
 };
 
 static const Rule rules[] = {
@@ -340,6 +341,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                                     7)
 	TAGKEYS(                        XK_9,                                     8)
 	{ MODKEY,                       XK_0,                      gridall,       {0} },
+	{ MODKEY,                       XK_grave,                  gridall,       {0} },
 	{ MODKEY|ShiftMask,             XK_0,                      tag,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_e,                      quit,          {0} },
 	{ MODKEY|ShiftMask,             XK_r,                      quit,          {1} },
