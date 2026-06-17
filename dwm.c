@@ -2535,10 +2535,10 @@ int last_showbar;
 void
 fullscreen(const Arg *arg)
 {
-	if (selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] != &layouts[6]) {
+	if (selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] != &layouts[7]) {
 		for(last_layout = (Layout *)layouts; last_layout != selmon->lt[selmon->sellt]; last_layout++);
 		last_showbar = selmon->showbar;
-		setlayout(&((Arg) { .v = &layouts[6] }));
+		setlayout(&((Arg) { .v = &layouts[7] }));
 		if (selmon->showbar)
 			togglebar(arg);
 	} else {
@@ -3785,7 +3785,7 @@ void
 gridall(const Arg *arg)
 {
 	view(&(Arg){.ui = ~0});
-	setlayout(&(Arg){.v = &layouts[5]});
+	setlayout(&(Arg){.v = &layouts[6]});
 }
 
 /* There's no way to check accesses to destroyed windows, thus those cases are

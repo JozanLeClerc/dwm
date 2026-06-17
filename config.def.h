@@ -143,6 +143,7 @@ static const float fgw = .75, fgh = .75;
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
+	{ "|+|",      tatami },
 	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
 	{ "|M|",      centeredmaster },
@@ -281,16 +282,16 @@ static const Key keys[] = {
 	{ METAKEY,                      XK_Escape,                view,           {0} },
 	{ MODKEY,                       XK_q,                     killclient,     {0} },
 	{ MODKEY,                       XK_s,                     setlayout,      {.v = &layouts[0]} }, /* tile */
-	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[0]} }, /* tile */
+	{ MODKEY|ShiftMask,             XK_s,                     setlayout,      {.v = &layouts[1]} }, /* tatami */
 	{ MODKEY,                       XK_z,                     setlayout,      {.v = &layouts[0]} }, /* tile */
-	{ MODKEY|ShiftMask,             XK_z,                     setlayout,      {.v = &layouts[0]} }, /* tile */
-	{ MODKEY,                       XK_x,                     setlayout,      {.v = &layouts[1]} }, /* bottoastack */
-	{ MODKEY|ShiftMask,             XK_x,                     setlayout,      {.v = &layouts[2]} }, /* bottomstackhoriz */
-	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[3]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[4]} }, /* centeredfloatingmaster */
-	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[5]} }, /* centeredmaster */
-	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[6]} }, /* monocle */
-	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[7]} }, /* floating */
+	{ MODKEY|ShiftMask,             XK_z,                     setlayout,      {.v = &layouts[1]} }, /* tatami */
+	{ MODKEY,                       XK_x,                     setlayout,      {.v = &layouts[2]} }, /* bottoastack */
+	{ MODKEY|ShiftMask,             XK_x,                     setlayout,      {.v = &layouts[3]} }, /* bottomstackhoriz */
+	{ MODKEY,                       XK_c,                     setlayout,      {.v = &layouts[4]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,             XK_c,                     setlayout,      {.v = &layouts[5]} }, /* centeredfloatingmaster */
+	{ MODKEY,                       XK_v,                     setlayout,      {.v = &layouts[6]} }, /* centeredmaster */
+	{ MODKEY,                       XK_m,                     setlayout,      {.v = &layouts[7]} }, /* monocle */
+	{ MODKEY,                       XK_n,                     setlayout,      {.v = &layouts[8]} }, /* floating */
 	{ MODKEY,                       XK_f,                     fullscreen,     {0} },
 	{ MODKEY|ShiftMask,             XK_space,                 setlayout,      {0} },
 	{ MODKEY,                       XK_space,                 togglefloating, {0} },
