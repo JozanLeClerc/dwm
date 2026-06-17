@@ -272,7 +272,6 @@ static void showhide(Client *c);
 static void sighup(int unused);
 static void sigterm(int unused);
 static void spawn(const Arg *arg);
-static void swapwindow(const Arg *arg);
 static Monitor *systraytomon(Monitor *m);
 static void tag(const Arg *arg);
 static void tagfollow(const Arg *arg);
@@ -2857,51 +2856,6 @@ spawn(const Arg *arg)
 		execvp(((char **)arg->v)[0], (char **)arg->v);
 		die("dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
 	}
-}
-
-void
-swapwindow(const Arg *arg)
-{
-	if (!selmon || !selmon->sel || !mons->next)
-		return;
-
-	Monitor *m1 = selmon;
-	Monitor *m2 = dirtomon(arg->i);
-
-	Client *c1 = m1->sel;
-	Client *c2 = m2->sel;
-
-	if (!c2) {
-		detach(c1);
-		detachstack(c1);
-		c1->mon = m2;
-		attach(c1);
-		attachstack(c1);
-		focus(c1);
-		selmon = m2;
-		arrange(m1);
-		arrange(m2);
-		return;
-	}
-
-	detach(c1);
-	detachstack(c1);
-	detach(c2);
-	detachstack(c2);
-
-	c1->mon = m2;
-	attach(c1);
-	attachstack(c1);
-	focus(c1);
-
-	c2->mon = m1;
-	attach(c2);
-	attachstack(c2);
-	focus(c2);
-
-	selmon = m1;
-	arrange(m1);
-	arrange(m2);
 }
 
 void
