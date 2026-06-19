@@ -97,7 +97,7 @@ static const char *tagsel[][3] = {
 	{ "#d65d0e", "#1b1b1b" }, // orange
 	{ "#d79921", "#1b1b1b" }, // yellow
 	{ "#458588", "#1b1b1b" }, // blue
-	{ "#8ec07c", "#1b1b1b" }, // cyan
+	{ "#689d6a", "#1b1b1b" }, // cyan
 	{ "#98971a", "#1b1b1b" }, // green
 	{ "#b16286", "#1b1b1b" }, // magenta
 	{ "#83a598", "#1b1b1b" }, // re blue
