@@ -255,7 +255,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_p,                     dmenuspawn,         {.v = dmpass_full_cmd } },
 	{ MODKEY|ShiftMask,             XK_p,                     dmenuspawn,         {.v = dmpass_name_cmd } },
 	{ MODKEY|ControlMask,           XK_o,                     dmenuspawn,         {.v = dmotp_cmd } },
-	{ MODKEY,                       XK_Home,                  spawn,              {.v = ndate_cmd } },
+	{ MODKEY,                       XK_Page_Down,             spawn,              {.v = ndate_cmd } },
 	{ 0,                            XF86XK_MonBrightnessUp,   spawn,              {.v = bl_inc_cmd } },
 	{ 0,                            XF86XK_MonBrightnessDown, spawn,              {.v = bl_dec_cmd } },
 	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,              {.v = vol_inc_cmd } },
@@ -279,7 +279,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,                     movestack,          {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,                     movestack,          {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,               {0} },
-	{ METAKEY,                      XK_Escape,                view,               {0} },
+	{ MODKEY,                       XK_g,                     view,               {0} },
 	{ MODKEY,                       XK_q,                     killclient,         {0} },
 	{ MODKEY,                       XK_s,                     setlayout,          {.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,             XK_s,                     setlayout,          {.v = &layouts[1]} }, /* tatami */
