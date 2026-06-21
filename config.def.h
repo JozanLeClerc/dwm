@@ -279,6 +279,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,                zoom,               {0} },
 	{ MODKEY,                       XK_g,                     view,               {0} },
 	{ MODKEY,                       XK_q,                     killclient,         {0} },
+	{ MODKEY,                       XK_w,                     killclient,         {0} },
 	{ MODKEY,                       XK_s,                     setlayout,          {.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,             XK_s,                     setlayout,          {.v = &layouts[1]} }, /* tatami */
 	{ MODKEY,                       XK_z,                     setlayout,          {.v = &layouts[0]} }, /* tile */
@@ -323,8 +324,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_bracketright,          focusmon,           {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,                     focusmon,           {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_l,                     focusmon,           {.i = -1 } },
-	{ MODKEY,                       XK_w,                     movemouse,          {0} },
-	{ MODKEY|ShiftMask,             XK_w,                     resizemouse,        {0} },
 	{ MODKEY,                       XK_minus,                 setgaps,            {.i = -1 } },
 	{ MODKEY,                       XK_equal,                 setgaps,            {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,                 setgaps,            {.i = 0  } },
